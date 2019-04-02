@@ -1,0 +1,80 @@
+spec:
+  template:
+    spec:
+      containers:
+        - resources:
+            requests:
+              cpu: "0.2"
+              memory: 256Mi
+            limits:
+              cpu: "1.0"
+              memory: 256Mi
+          env:
+            - name: SPRING_APPLICATION_JSON
+              value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'
+
+            - name: SECRETS_MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.username
+
+            - name: SECRETS_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.password
+
+            - name: SECRETS_MONGO_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.data.mongodb.database
+
+            - name: SECRETS_MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.data.mongodb.username
+
+            - name: SECRETS_MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.data.mongodb.password
+
+            - name: MAIL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.host
+
+            - name: MAIL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.port
+
+            - name: MAIL_SMTP_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.properties.mail.smtp.auth
+
+            - name: MAIL_SMTP_STARTTLS
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.mail.properties.mail.smtp.starttls.enable
+
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.data.mongodb.host
+
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: spring-correo-eletronico-service
+                  key: spring.data.mongodb.port

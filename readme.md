@@ -1,6 +1,17 @@
+**- Crear Secrets DSV:**
+
+* oc create secret generic spring-correo-eletronico-service --from-literal=spring.mail.username=gabriel.schaidhauer.ntconsult --from-literal=spring.mail.password=S3gur4nc4+ --from-literal=spring.data.mongodb.database=maildb --from-literal=spring.data.mongodb.username=userSF7 --from-literal=spring.data.mongodb.password=8MegXXohsbyPGkrT
+
+* oc create configmap spring-correo-eletronico-service --from-env-file=conf/cm-dev.properties
+
+* Despliegue en Openshift
+oc login https://desconsoleops.dombif.peru
+oc project rhdm
+mvn clean -DskipTests fabric8:deploy -Popenshift
+
 **Templates**
 
-Existem 5 templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
+Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
 
 * AHORRO_PROGRAMADO_AHORRO_PROGRAMADO
 
