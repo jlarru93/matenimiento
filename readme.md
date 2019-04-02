@@ -6,7 +6,7 @@
 
 * Despliegue en Openshift
 oc login https://desconsoleops.dombif.peru
-oc project rhdm
+oc project email-service
 mvn clean -DskipTests fabric8:deploy -Popenshift
 
 **Templates**
@@ -33,6 +33,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "customerName"
                     },
                     "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
                 },
                 {
                 	"tag": {
@@ -81,6 +87,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "customerName"
                     },
                     "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
@@ -133,6 +145,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
                         "clave": "originAccount"
                     },
                     "valor": "001-00"
@@ -179,6 +197,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "customerName"
                     },
                     "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
@@ -231,6 +255,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
                         "clave": "originAccount"
                     },
                     "valor": "001-00"
@@ -262,7 +292,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_VUELTO_EDICION_DE_AHORRO",
+                "tipoCorreo": "AHORRO_PROGRAMADO_EDICION_DE_AHORRO",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
@@ -277,6 +307,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "customerName"
                     },
                     "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
@@ -329,6 +365,12 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
                         "clave": "originAccount"
                     },
                     "valor": "001-00"
@@ -350,6 +392,68 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "frequency"
                     },
                     "valor": "A cada transacion"
+                }
+            ]
+        }
+    ```
+    
+* AHORRO_VUELTO_SUPRESSION_DE_AHORRO
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "AHORRO_VUELTO_SUPRESSION_DE_AHORRO",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "customerName"
+                    },
+                    "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
+                }
+            ]
+        }
+    ```
+    
+* AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "customerName"
+                    },
+                    "valor": "John Doe"
+                },
+                {
+                    "tag": {
+                        "clave": "savingsName"
+                    },
+                    "valor": "Educación de mi hijo"
                 }
             ]
         }

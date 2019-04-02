@@ -77,6 +77,10 @@ public class TemplateService {
                 return "edited-savings-template.html";
             case AHORRO_VUELTO_EDICION_DE_AHORRO:
                 return "edited-round-savings-template.html";
+            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+                return "deleted-savings-template.html";
+            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
+                return "deleted-round-savings-template.html";
             default:
                 throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
         }

@@ -103,6 +103,7 @@ public class EmailService {
                 .destinatario(new Destinatario().enderecoCorreo(email.getTo()));
 
         correo.templateCorreo(templateCorreo)
+                .codigo(email.getId())
                 .valoresTags(templateService.fromMap(email.getTemplateVariables()));
 
         return correo;
