@@ -1,7 +1,6 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -9,6 +8,10 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 import pe.com.banbif.correo.eletronico.service.data.entity.Email;
 import pe.com.banbif.correo.eletronico.service.data.repository.EmailRepository;
+import pe.com.banbif.correo.eletronico.service.model.Correo;
+import pe.com.banbif.correo.eletronico.service.model.Destinatario;
+import pe.com.banbif.correo.eletronico.service.model.Remetente;
+import pe.com.banbif.correo.eletronico.service.model.TemplateCorreo;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -26,9 +29,6 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
     private final SendLogService sendLogService;
     private final ErrorLogService errorLogService;
-
-    @Value("${mail.from}")
-    private String from;
 
     @Autowired
     public EmailService(
@@ -76,7 +76,7 @@ public class EmailService {
     }
 
 
-    public Email queueEmail(Email email) {
+    public Correo queueEmail(Correo email) {
         if (!isValid(email)) {
             throw new RuntimeException(INVALID_EMAIL_ERROR_MESSAGE);
         }
@@ -87,25 +87,58 @@ public class EmailService {
             throw new RuntimeException(TEMPLATE_GENERATION_ERROR);
         }
 
-        email.setFrom(from);
-        email.setEmailContent(emailContent);
-        return this.repository.save(email);
+        email.getTemplateCorreo().setContenido(emailContent);
+        return fromEmail(this.repository.save(toEmail(email)));
     }
 
-    private boolean isValid(Email email) {
-        if (Objects.isNull(email)) {
+    private Correo fromEmail(Email email) {
+        Correo correo = new Correo();
+        TemplateCorreo templateCorreo = new TemplateCorreo();
+
+        templateCorreo
+                .contenido(email.getEmailContent())
+                .remetente(new Remetente().enderecoCorreo(email.getFrom()))
+                .asunto(email.getSubject())
+                .tipoCorreo(email.getTemplate())
+                .destinatario(new Destinatario().enderecoCorreo(email.getTo()));
+
+        correo.templateCorreo(templateCorreo)
+                .valoresTags(templateService.fromMap(email.getTemplateVariables()));
+
+        return correo;
+
+    }
+
+    private Email toEmail(Correo correo) {
+        Email email = new Email();
+        email.setEmailContent(correo.getTemplateCorreo().getContenido());
+        email.setFrom(correo.getTemplateCorreo().getRemetente().getEnderecoCorreo());
+        email.setSubject(correo.getTemplateCorreo().getAsunto());
+        email.setTemplate(correo.getTemplateCorreo().getTipoCorreo());
+        email.setTemplateVariables(templateService.toMap(correo.getValoresTags()));
+        email.setTo(correo.getTemplateCorreo().getDestinatario().getEnderecoCorreo());
+
+        return email;
+    }
+
+    private boolean isValid(Correo email) {
+        if (Objects.isNull(email.getTemplateCorreo())) {
             return false;
         }
 
-        if (StringUtils.isEmpty(email.getTo())) {
+        if (Objects.isNull(email.getTemplateCorreo().getDestinatario())) {
             return false;
         }
 
-        if (Objects.isNull(email.getTemplate())) {
+        if(StringUtils.isEmpty(email.getTemplateCorreo().getDestinatario().getEnderecoCorreo())) {
             return false;
         }
 
-        return !Objects.isNull(email.getTemplateVariables());
+        if(Objects.isNull(email.getTemplateCorreo().getTipoCorreo())) {
+            return false;
+        }
 
+
+        return !Objects.isNull(email.getValoresTags()) && !email.getValoresTags().isEmpty();
     }
 }

@@ -1,8 +1,8 @@
 package pe.com.banbif.correo.eletronico.service.data.entity;
 
 import org.springframework.data.annotation.Id;
-import pe.com.banbif.correo.eletronico.service.data.enumeration.Template;
 
+import pe.com.banbif.correo.eletronico.service.model.TiposCorreos;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class Email {
     private List<String> bcc;
     private String subject;
     private String emailContent;
-    private Template template;
+    private TiposCorreos template;
     private Map<String, Object> templateVariables;
 
     public String getId() {
@@ -67,11 +67,11 @@ public class Email {
         this.emailContent = emailContent;
     }
 
-    public Template getTemplate() {
+    public TiposCorreos getTemplate() {
         return template;
     }
 
-    public void setTemplate(Template template) {
+    public void setTemplate(TiposCorreos template) {
         this.template = template;
     }
 

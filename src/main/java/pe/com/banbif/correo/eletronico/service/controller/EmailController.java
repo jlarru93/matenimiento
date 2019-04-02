@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pe.com.banbif.correo.eletronico.service.business.EmailService;
-import pe.com.banbif.correo.eletronico.service.data.entity.Email;
+
+import pe.com.banbif.correo.eletronico.service.model.Correo;
+import pe.com.banbif.correo.eletronico.service.model.PostCorreoResponse;
 
 @RestController
 public class EmailController {
@@ -19,7 +21,8 @@ public class EmailController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Email> queueEmail(@RequestBody Email email) {
-        return ResponseEntity.ok(this.emailService.queueEmail(email));
+    public ResponseEntity<PostCorreoResponse> queueEmail(@RequestBody Correo email) {
+        PostCorreoResponse response = new PostCorreoResponse().datos(this.emailService.queueEmail(email));
+        return ResponseEntity.ok(response);
     }
 }
