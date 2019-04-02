@@ -81,6 +81,10 @@ public class TemplateService {
                 return "deleted-savings-template.html";
             case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
                 return "deleted-round-savings-template.html";
+            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
+            	return "disposicion-sucess-template.html";
+            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+            	return "disposicion-error-template.html";
             default:
                 throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
         }
