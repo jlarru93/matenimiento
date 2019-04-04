@@ -166,12 +166,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "value"
                     },
                     "valor": "U$ 450,00"
-                },
-                {
-                    "tag": {
-                        "clave": "frequency"
-                    },
-                    "valor": "A cada transacion"
                 }
             ]
         }
@@ -386,12 +380,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "value"
                     },
                     "valor": "U$ 450,00"
-                },
-                {
-                    "tag": {
-                        "clave": "frequency"
-                    },
-                    "valor": "A cada transacion"
                 }
             ]
         }
