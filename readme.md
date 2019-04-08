@@ -30,39 +30,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                 	"tag": {
-                		"clave": "originAccount"
+                		"clave": "Cuenta Origen"
                 	},
                 	"valor": "001-00"
                 },
                 {
                 	"tag": {
-                		"clave": "destinyAccount"
+                		"clave": "Cuenta Destino"
                 	},
                 	"valor": "003-00"
                 },
                 {
                 	"tag": {
-                		"clave": "value"
+                		"clave": "Monto de Redondeo"
                 	},
                 	"valor": "U$ 450,00"
                 },
                 {
                 	"tag": {
-                		"clave": "frequency"
+                		"clave": "Frecuencia"
                 	},
                 	"valor": "Diario"
+                },
+                {
+                	"tag": {
+                		"clave": "ITF"
+                	},
+                	"valor": "999999"
+                },
+                {
+                	"tag": {
+                		"clave": "Fecha y Hora"
+                	},
+                	"valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -76,7 +88,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
-                "asunto": "Teste @ 123",
+                "asunto": "Ejecución Ahorro Programado",
                 "destinatario": {
                     "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
                 }
@@ -84,39 +96,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto"
                     },
                     "valor": "U$ 450,00"
                 },
                 {
                     "tag": {
-                        "clave": "datetime"
+                        "clave": "Frecuencia"
                     },
-                    "valor": "10/05/2019 10:00:23"
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "999999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -131,7 +155,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
-                "asunto": "Teste @ 123",
+                "asunto": "Programacíon de Ahorro Vuelto",
                 "destinatario": {
                     "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
                 }
@@ -139,33 +163,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto de Redondeo"
                     },
                     "valor": "U$ 450,00"
+                },
+                {
+                    "tag": {
+                        "clave": "Frecuencia"
+                    },
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "999999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -188,39 +230,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto a Ahorrar"
                     },
                     "valor": "U$ 450,00"
                 },
                 {
                     "tag": {
-                        "clave": "datetime"
+                        "clave": "Frecuencia"
                     },
-                    "valor": "10/05/2019 10:00:23"
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "999999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -243,39 +297,57 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto Ahorrado"
                     },
                     "valor": "U$ 450,00"
                 },
                 {
                     "tag": {
-                        "clave": "datetime"
+                        "clave": "Monto a Ahorrar"
+                    },
+                    "valor": "U$ 150,00"
+                },
+                {
+                    "tag": {
+                        "clave": "Frecuencia"
                     },
                     "valor": "10/05/2019 10:23:55"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "999999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -298,39 +370,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto"
                     },
                     "valor": "U$ 450,00"
                 },
                 {
                     "tag": {
-                        "clave": "frequency"
+                        "clave": "Frecuencia"
                     },
                     "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "89999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -353,33 +437,51 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
                 },
                 {
                     "tag": {
-                        "clave": "originAccount"
+                        "clave": "Cuenta Origen"
                     },
                     "valor": "001-00"
                 },
                 {
                     "tag": {
-                        "clave": "destinyAccount"
+                        "clave": "Cuenta Destino"
                     },
                     "valor": "003-00"
                 },
                 {
                     "tag": {
-                        "clave": "value"
+                        "clave": "Monto de Redondeo"
                     },
                     "valor": "U$ 450,00"
+                },
+                {
+                    "tag": {
+                        "clave": "Frecuencia"
+                    },
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "9999999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -402,15 +504,33 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
+                        "clave": "Frecuencia"
+                    },
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "9999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
@@ -433,17 +553,226 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
             "valoresTags": [
                 {
                     "tag": {
-                        "clave": "customerName"
+                        "clave": "Cliente"
                     },
                     "valor": "John Doe"
                 },
                 {
                     "tag": {
-                        "clave": "savingsName"
+                        "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
+                        "clave": "Frecuencia"
+                    },
+                    "valor": "Diario"
+                },
+                {
+                    "tag": {
+                        "clave": "ITF"
+                    },
+                    "valor": "9999"
+                },
+                {
+                    "tag": {
+                        "clave": "Fecha y Hora"
+                    },
+                    "valor": "15/07/2019 10:55:10"
                 }
             ]
         }
     ```
+    
+* DISPOSICION_EFECTIVO_OPERACION_COMPLETADA
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "DISPOSICION_EFECTIVO_OPERACION_COMPLETADA",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "cliente"
+                    },
+                    "valor": "cliente *"
+                },
+                {
+                    "tag": {
+                        "clave": "tipoOperacion"
+                    },
+                    "valor": "tipoOperacion *"
+                },
+                {
+                    "tag": {
+                        "clave": "tarjeta"
+                    },
+                    "valor": " tarjeta *"
+                },
+                {
+                    "tag": {
+                        "clave": "montoCargo"
+                    },
+                    "valor": "montoCargo *"
+                },
+                {
+                    "tag": {
+                        "clave": "modalidad"
+                    },
+                    "valor": "modalidad *"
+                },
+                {
+                    "tag": {
+                        "clave": "numeroCuotas"
+                    },
+                    "valor": "numeroCuotas *"
+                },
+                {
+                    "tag": {
+                        "clave": "nombreBeneficiario"
+                    },
+                    "valor": "nombreBeneficiario *"
+                },
+                {
+                    "tag": {
+                        "clave": "cuentaAbono"
+                    },
+                    "valor": "cuentaAbono *"
+                },
+                {
+                    "tag": {
+                        "clave": "montoAbono"
+                    },
+                    "valor": "montoAbono *"
+                },
+                {
+                    "tag": {
+                        "clave": "itf"
+                    },
+                    "valor": "itf *"
+                },
+                {
+                    "tag": {
+                        "clave": "fechaOperacion"
+                    },
+                    "valor": "fechaOperacion *"
+                },
+                {
+                    "tag": {
+                        "clave": "descricion"
+                    },
+                    "valor": "descricion *"
+                },
+                {
+                    "tag": {
+                        "clave": "numero"
+                    },
+                    "valor": "123456"
+                }
+            ]
+        }
+    ```
+    
+* DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "cliente"
+                    },
+                    "valor": "cliente *"
+                },
+                {
+                    "tag": {
+                        "clave": "tipoOperacion"
+                    },
+                    "valor": "tipoOperacion *"
+                },
+                {
+                    "tag": {
+                        "clave": "tarjeta"
+                    },
+                    "valor": " tarjeta *"
+                },
+                {
+                    "tag": {
+                        "clave": "montoCargo"
+                    },
+                    "valor": "montoCargo *"
+                },
+                {
+                    "tag": {
+                        "clave": "modalidad"
+                    },
+                    "valor": "modalidad *"
+                },
+                {
+                    "tag": {
+                        "clave": "numeroCuotas"
+                    },
+                    "valor": "numeroCuotas *"
+                },
+                {
+                    "tag": {
+                        "clave": "nombreBeneficiario"
+                    },
+                    "valor": "nombreBeneficiario *"
+                },
+                {
+                    "tag": {
+                        "clave": "cuentaAbono"
+                    },
+                    "valor": "cuentaAbono *"
+                },
+                {
+                    "tag": {
+                        "clave": "montoAbono"
+                    },
+                    "valor": "montoAbono *"
+                },
+                {
+                    "tag": {
+                        "clave": "itf"
+                    },
+                    "valor": "itf *"
+                },
+                {
+                    "tag": {
+                        "clave": "fechaOperacion"
+                    },
+                    "valor": "fechaOperacion *"
+                },
+                {
+                    "tag": {
+                        "clave": "descricion"
+                    },
+                    "valor": "descricion *"
+                }
+            ]
+        }
+    ```
+    
+    
+    
     
