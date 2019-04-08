@@ -4,15 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
+import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
 import pe.com.banbif.correo.eletronico.service.model.Correo;
 import pe.com.banbif.correo.eletronico.service.model.TagCorreo;
 import pe.com.banbif.correo.eletronico.service.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.model.ValorTag;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 @Service
 public class TemplateService {
@@ -28,12 +26,12 @@ public class TemplateService {
     public String getContent(Correo email) {
         return this.templateEngine.process(
                 getTemplate(email.getTemplateCorreo().getTipoCorreo()),
-                getContext(toMap(email.getValoresTags()))
+                getContext(generateContent(email))
         );
     }
 
     public Map<String, Object> toMap(List<ValorTag> tags) {
-        Map<String, Object> mappedValues = new HashMap<>();
+        Map<String, Object> mappedValues = new LinkedHashMap<>();
         tags.forEach(tag -> {
             mappedValues.put(tag.getTag().getClave(), tag.getValor());
         });
@@ -55,36 +53,139 @@ public class TemplateService {
         return tags;
     }
 
-    private Context getContext(Map<String, Object> variables) {
+    private Context getContext(EmailTemplateContent email) {
         final Context context = new Context();
-        context.setVariables(variables);
+
+        context.setVariable("htmlTitle", email.getHtmlTitle());
+        context.setVariable("title", email.getTitle());
+        context.setVariable("subtitle", email.getSubtitle());
+        context.setVariable("content", email.getContent());
+        context.setVariable("titleDetails", email.getTitleDetails());
+
         return context;
+    }
+
+    private EmailTemplateContent generateContent(Correo mail) {
+        EmailTemplateContent emailContent = new EmailTemplateContent();
+        emailContent.setHtmlTitle(getHtmlTitle(mail.getTemplateCorreo().getTipoCorreo()));
+        emailContent.setTitle(getTitle(mail.getTemplateCorreo().getTipoCorreo()));
+        emailContent.setSubtitle(getSubtitle(mail.getTemplateCorreo().getTipoCorreo()));
+        emailContent.setContent(toMap(mail.getValoresTags()));
+        emailContent.setTitleDetails(getTitleDetails(mail.getTemplateCorreo().getTipoCorreo()));
+
+        return emailContent;
     }
 
     private String getTemplate(TiposCorreos template) {
         switch (template) {
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "scheduled-round-savings-template.html";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-                return "savings-transfer-success.html";
             case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-                return "savings-transfer-lack-resources.html";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-                return "scheduled-savings-template.html";
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-                return "savings-transfer-partial-success.html";
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-                return "edited-savings-template.html";
             case AHORRO_VUELTO_EDICION_DE_AHORRO:
-                return "edited-round-savings-template.html";
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-                return "deleted-savings-template.html";
             case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-                return "deleted-round-savings-template.html";
+                return "banbif-template.html";
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-            	return "disposicion-sucess-template.html";
+                return "disposicion-sucess-template.html";
             case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-            	return "disposicion-error-template.html";
+                return "disposicion-error-template.html";
+            default:
+                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+        }
+    }
+
+    private String getHtmlTitle(TiposCorreos template) {
+        switch (template) {
+            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
+            case AHORRO_VUELTO_EDICION_DE_AHORRO:
+            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
+                return "BanBif - Ahorro Vuelto";
+
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
+            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
+            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+                return "BanBif - Ahorro Programado";
+
+            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
+            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+                return "BanBif - Disposición de Efectivo";
+            default:
+                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+        }
+    }
+
+    private String getTitle(TiposCorreos template) {
+        switch (template) {
+            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
+                return "Programación de Ahorro Vuelto Eliminado con Éxito";
+            case AHORRO_VUELTO_EDICION_DE_AHORRO:
+                return "Programación de Ahorro Vuelto Cambiado con Éxito";
+            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
+                return "Programación del Ahorro Vuelto Efectuado con Éxito";
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
+                return "Ahorro Efectuado con Éxito";
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+                return "Tu Operación no Pudo ser Completada";
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
+                return "Programación del Ahorro Efectuado con Éxito";
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
+                return "Transferencia Parcial para el Ahorro";
+            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
+                return "Programación de Ahorro Cambiado con Éxito";
+            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+                return "Programación de Ahorro Eliminado con Éito";
+            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
+            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+                return "";
+            default:
+                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+        }
+    }
+
+    private String getSubtitle(TiposCorreos template) {
+        switch (template) {
+            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
+            case AHORRO_VUELTO_EDICION_DE_AHORRO:
+            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
+            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
+            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+                return "Información de la Programación";
+
+            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
+            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+                return "";
+
+            default:
+                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+        }
+    }
+
+    private String getTitleDetails(TiposCorreos template) {
+        switch (template) {
+            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
+            case AHORRO_VUELTO_EDICION_DE_AHORRO:
+            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
+            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
+            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
+            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
+            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+                return "";
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+                return "No se pudo realizar el abono a la cuenta solicitada. Te recomendamos revisar si la cuenta de retiro tiene fondos. También puede llmarmos a nuestra Banca Telefónica: Lima (01) 631-9000 Provincias 0-801-0-0456";
+
             default:
                 throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
         }

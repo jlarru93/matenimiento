@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title th:remove="all">Template for HTML email with inline image</title>
+    <title th:remove="all" th:text="${htmlTitle}">BanBif - Disposición Efectivo</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-language" content="es">
 </head>
 
 <body>
@@ -40,11 +41,9 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 0cm 0cm 0cm 0cm">
-                                        <p class="x_x_MsoNormal">
-															<span style="font-size: 7.5pt"><img id="_x0000_i1026"
-                                                                                                src="http://i.imgur.com/0WOQ8cR.png">
-                                                                <!-- node type 8 --></span>
-                                        </p>
+                                        <img id="_x0000_i1026"
+                                             src="http://i.imgur.com/0WOQ8cR.png">
+                                        <!-- node type 8 -->
                                     </td>
                                 </tr>
                                 <tr>
@@ -99,14 +98,14 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${cliente}">
+                                                                                    th:text="${content.cliente}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 20.0%; background: white; border-bottom: solid #E3E2E2 1.0pt; padding: 3.75pt 7.5pt 0cm 0cm" 
+                                                <td style="width: 20.0%; background: white; border-bottom: solid #E3E2E2 1.0pt; padding: 3.75pt 7.5pt 0cm 0cm"
                                                     width="20%">
                                                     <p class="x_x_MsoNormal">
 																			<span
@@ -120,7 +119,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${tipoOperacion}">
+                                                                                    th:text="${content.tipoOperacion}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -141,7 +140,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${tarjeta}">
+                                                                                    th:text="${content.tarjeta}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -162,7 +161,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${montoCargo}">
+                                                                                    th:text="${content.montoCargo}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -183,7 +182,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${modalidad}">
+                                                                                    th:text="${content.modalidad}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -204,7 +203,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${numeroCuotas}">
+                                                                                    th:text="${content.numeroCuotas}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -225,7 +224,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${nombreBeneficiario}">
+                                                                                    th:text="${content.nombreBeneficiario}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -246,7 +245,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${cuentaAbono}">
+                                                                                    th:text="${content.cuentaAbono}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -267,7 +266,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${montoAbono}">
+                                                                                    th:text="${content.montoAbono}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -288,7 +287,7 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${itf}">
+                                                                                    th:text="${content.itf}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
@@ -309,12 +308,12 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${fechaOperacion}">
+                                                                                    th:text="${content.fechaOperacion}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
                                                 </td>
-                                            </tr> 
+                                            </tr>
                                             <tr>
                                                 <td style="width: 20.0%;  padding: 3.75pt 7.5pt 0cm 0cm"
                                                     width="20%">
@@ -330,12 +329,12 @@
                                                     <p class="x_x_MsoNormal">
 																			<span
                                                                                     style="font-size: 9.0pt; font-family: 'Verdana', sans-serif; color: #333333"
-                                                                                    th:text="${descricion}">
+                                                                                    th:text="${content.descricion}">
 																				<!-- node type 8 -->
 																			</span>
                                                     </p>
                                                 </td>
-                                            </tr>                                                                                                                                                                                     
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </td>
