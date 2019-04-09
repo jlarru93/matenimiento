@@ -11,7 +11,7 @@ mvn clean -DskipTests fabric8:deploy -Popenshift
 
 **Templates**
 
-Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
+Existem templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
 
 * AHORRO_PROGRAMADO_AHORRO_PROGRAMADO
 
