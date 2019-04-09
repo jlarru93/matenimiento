@@ -123,23 +123,23 @@ public class TemplateService {
     private String getTitle(TiposCorreos template) {
         switch (template) {
             case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-                return "Programación de Ahorro Vuelto Eliminado con Éxito";
+                return "Ahorro Vuelto - Programación Eliminado con Éxito";
             case AHORRO_VUELTO_EDICION_DE_AHORRO:
-                return "Programación de Ahorro Vuelto Cambiado con Éxito";
+                return "Ahorro Vuelto - Programación Cambiado con Éxito";
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "Programación del Ahorro Vuelto Efectuado con Éxito";
+                return "Ahorro Vuelto - Programación Efectuada con Éxito";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-                return "Ahorro Efectuado con Éxito";
+                return "Ahorro Programado - Ejecución Efectuada con Êxito";
             case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-                return "Tu Operación no Pudo ser Completada";
+                return "Ahorro Programado - Ejecución no Pudo ser Completada";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-                return "Programación del Ahorro Efectuado con Éxito";
+                return "Ahorro Programado - Programación Efectuada con Éxito";
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-                return "Transferencia Parcial para el Ahorro";
+                return "Ahorro Programado - Transferencia Parcialmente Realizada";
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-                return "Programación de Ahorro Cambiado con Éxito";
+                return "Ahorro Programado - Programación Cambiado con Éxito";
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-                return "Programación de Ahorro Eliminado con Éito";
+                return "Ahorro Programado - Programación Eliminado con Éxito";
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
             case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
                 return "";
