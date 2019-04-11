@@ -11,14 +11,14 @@ mvn clean -DskipTests fabric8:deploy -Popenshift
 
 **Templates**
 
-Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
+Existem templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
 
 * AHORRO_PROGRAMADO_AHORRO_PROGRAMADO
 
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_VUELTO_AHORRO_PROGRAMADO",
+                "tipoCorreo": "AHORRO_PROGRAMADO_AHORRO_PROGRAMADO",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer.ntconsult@gmail.com"
                 },
@@ -54,7 +54,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                 	"tag": {
-                		"clave": "Monto de Redondeo"
+                		"clave": "Monto a Ahorrar"
                 	},
                 	"valor": "U$ 450,00"
                 },
@@ -63,12 +63,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 		"clave": "Frecuencia"
                 	},
                 	"valor": "Diario"
-                },
-                {
-                	"tag": {
-                		"clave": "ITF"
-                	},
-                	"valor": "999999"
                 },
                 {
                 	"tag": {
@@ -120,7 +114,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
-                        "clave": "Monto"
+                        "clave": "Monto Ahorrado"
                     },
                     "valor": "U$ 450,00"
                 },
@@ -129,12 +123,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "Frecuencia"
                     },
                     "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "999999"
                 },
                 {
                     "tag": {
@@ -189,19 +177,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                     "tag": {
                         "clave": "Monto de Redondeo"
                     },
-                    "valor": "U$ 450,00"
-                },
-                {
-                    "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "999999"
+                    "valor": "S/ 1"
                 },
                 {
                     "tag": {
@@ -266,12 +242,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "999999"
-                },
-                {
-                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -323,25 +293,19 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                     "tag": {
                         "clave": "Monto Ahorrado"
                     },
-                    "valor": "U$ 450,00"
+                    "valor": "U$ 150,00"
                 },
                 {
                     "tag": {
                         "clave": "Monto a Ahorrar"
                     },
-                    "valor": "U$ 150,00"
+                    "valor": "U$ 450,00"
                 },
                 {
                     "tag": {
                         "clave": "Frecuencia"
                     },
-                    "valor": "10/05/2019 10:23:55"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "999999"
+                    "valor": "Diario"
                 },
                 {
                     "tag": {
@@ -394,7 +358,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                 },
                 {
                     "tag": {
-                        "clave": "Monto"
+                        "clave": "Monto a Ahorrar"
                     },
                     "valor": "U$ 450,00"
                 },
@@ -403,12 +367,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "Frecuencia"
                     },
                     "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "89999"
                 },
                 {
                     "tag": {
@@ -463,19 +421,7 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                     "tag": {
                         "clave": "Monto de Redondeo"
                     },
-                    "valor": "U$ 450,00"
-                },
-                {
-                    "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "9999999"
+                    "valor": "S/ 5"
                 },
                 {
                     "tag": {
@@ -513,18 +459,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
-                },
-                {
-                    "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "9999"
                 },
                 {
                     "tag": {
@@ -568,12 +502,6 @@ Existem 7 templates de envio de e-mail mapeados, cada um deles tem seu set de va
                         "clave": "Frecuencia"
                     },
                     "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "9999"
                 },
                 {
                     "tag": {
