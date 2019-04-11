@@ -181,18 +181,6 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "999999"
-                },
-                {
-                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -437,18 +425,6 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "9999999"
-                },
-                {
-                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -483,18 +459,6 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                         "clave": "Nombre Ahorro"
                     },
                     "valor": "Educación de mi hijo"
-                },
-                {
-                    "tag": {
-                        "clave": "Frecuencia"
-                    },
-                    "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "ITF"
-                    },
-                    "valor": "9999"
                 },
                 {
                     "tag": {
