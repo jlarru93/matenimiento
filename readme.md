@@ -181,6 +181,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"

@@ -127,13 +127,13 @@ public class TemplateService {
             case AHORRO_VUELTO_EDICION_DE_AHORRO:
                 return "Ahorro Vuelto - Programación Cambiado con Éxito";
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "Ahorro Vuelto - Programación Efectuada con Éxito";
+                return "Ahorro Vuelto - Registrado con Éxito";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
                 return "Ahorro Programado - Ejecución Efectuada con Êxito";
             case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
                 return "Ahorro Programado - Ejecución no Pudo ser Completada";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-                return "Ahorro Programado - Programación Efectuada con Éxito";
+                return "Ahorro Programado – Programación Exitosa";
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
                 return "Ahorro Programado - Transferencia Parcialmente Realizada";
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
