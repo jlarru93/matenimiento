@@ -65,6 +65,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 	"valor": "Diario"
                 },
                 {
+                    "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
                 	"tag": {
                 		"clave": "Fecha y Hora"
                 	},
@@ -123,12 +129,6 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                         "clave": "Frecuencia"
                     },
                     "valor": "Diario"
-                },
-                {
-                    "tag": {
-                        "clave": "Ciclo de Vida"
-                    },
-                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
                 },
                 {
                     "tag": {
