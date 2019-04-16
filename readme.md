@@ -126,6 +126,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -195,12 +201,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO
+* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA
 
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
+                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
@@ -256,12 +262,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
  
-* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA
+* AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL
 
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
+                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
@@ -376,6 +382,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -428,6 +440,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                         "clave": "Monto de Redondeo"
                     },
                     "valor": "S/ 5"
+                },
+                {
+                    "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
                 },
                 {
                     "tag": {
@@ -514,6 +532,49 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
+                }
+            ]
+        }
+    ```
+    
+* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "Nombre Ahorro"
+                    },
+                    "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
+                        "clave": "Cuenta Origen"
+                    },
+                    "valor": "001-00"
+                },
+                {
+                    "tag": {
+                        "clave": "Cuenta Destino"
+                    },
+                    "valor": "003-00"
+                },
+                {
+                    "tag": {
+                        "clave": "Monto a Ahorrar"
+                    },
+                    "valor": "U$ 450,00"
                 }
             ]
         }
