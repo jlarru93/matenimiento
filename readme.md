@@ -13,7 +13,7 @@ mvn clean -DskipTests fabric8:deploy -Popenshift
 
 Existem templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
 
-* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO
+* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO - Registro da Programação de Ahorro
 
     ```json
         {
@@ -65,6 +65,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 	"valor": "Diario"
                 },
                 {
+                    "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
                 	"tag": {
                 		"clave": "Fecha y Hora"
                 	},
@@ -73,7 +79,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
             ]
         }
     ```
-* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO
+* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO - Execução completa e com êxito de ahorro
 
     ```json
         {
@@ -134,7 +140,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_VUELTO_AHORRO_PROGRAMADO
+* AHORRO_VUELTO_AHORRO_PROGRAMADO - Registro do ahorro vuelto
 
     ```json
         {
@@ -181,6 +187,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -189,12 +201,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO
+* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA - Houve um problema (ex. falta de fundos na conta)
 
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
+                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
@@ -250,12 +262,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
  
-* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA
+* AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL - Houve uma transferência parcial de ahorro, faltou valores
 
     ```json
         {
             "templateCorreo": {
-                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
+                "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL",
                 "remetente": {
                     "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
                 },
@@ -317,7 +329,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_EDICION_DE_AHORRO
+* AHORRO_PROGRAMADO_EDICION_DE_AHORRO - Ahorro programado foi alterado
 
     ```json
         {
@@ -370,6 +382,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -378,7 +396,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
 
-* AHORRO_VUELTO_EDICION_DE_AHORRO
+* AHORRO_VUELTO_EDICION_DE_AHORRO - Ahorro Vuelto foi alterado
 
     ```json
         {
@@ -425,6 +443,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Ciclo de Vida"
+                    },
+                    "valor": "Desde 10/05/2019 hasta 10/05/2020"
+                },
+                {
+                    "tag": {
                         "clave": "Fecha y Hora"
                     },
                     "valor": "15/07/2019 10:55:10"
@@ -433,7 +457,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_VUELTO_SUPRESSION_DE_AHORRO
+* AHORRO_VUELTO_SUPRESSION_DE_AHORRO - Ahorro vuelto foi removido
 
     ```json
         {
@@ -470,7 +494,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO
+* AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO - Ahorro programado foi removido
 
     ```json
         {
@@ -513,7 +537,50 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* DISPOSICION_EFECTIVO_OPERACION_COMPLETADA
+* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO - Ahorro programado foi desativado por excesso de tentativas
+
+    ```json
+        {
+            "templateCorreo": {
+                "tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
+                "remetente": {
+                    "enderecoCorreo": "gabriel.schaidhauer@gmail.com"
+                },
+                "asunto": "Teste @ 123",
+                "destinatario": {
+                    "enderecoCorreo": "gabriel.schaidhauer@ntconsult.com.br"
+                }
+            },
+            "valoresTags": [
+                {
+                    "tag": {
+                        "clave": "Nombre Ahorro"
+                    },
+                    "valor": "Educación de mi hijo"
+                },
+                {
+                    "tag": {
+                        "clave": "Cuenta Origen"
+                    },
+                    "valor": "001-00"
+                },
+                {
+                    "tag": {
+                        "clave": "Cuenta Destino"
+                    },
+                    "valor": "003-00"
+                },
+                {
+                    "tag": {
+                        "clave": "Monto a Ahorrar"
+                    },
+                    "valor": "U$ 450,00"
+                }
+            ]
+        }
+    ```
+    
+* DISPOSICION_EFECTIVO_OPERACION_COMPLETADA - Operação realizada com sucesso de disposição de efetivo
 
     ```json
         {
@@ -610,7 +677,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA
+* DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA - Houve um erro na disposição de efetivo
 
     ```json
         {

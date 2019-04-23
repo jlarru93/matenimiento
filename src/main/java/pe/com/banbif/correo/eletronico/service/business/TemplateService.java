@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
-import pe.com.banbif.correo.eletronico.service.model.Correo;
-import pe.com.banbif.correo.eletronico.service.model.TagCorreo;
-import pe.com.banbif.correo.eletronico.service.model.TiposCorreos;
-import pe.com.banbif.correo.eletronico.service.model.ValorTag;
+import pe.com.banbif.correo.eletronico.service.model.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class TemplateService {
@@ -81,6 +81,7 @@ public class TemplateService {
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
             case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
@@ -110,6 +111,7 @@ public class TemplateService {
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
                 return "BanBif - Ahorro Programado";
 
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
@@ -127,19 +129,21 @@ public class TemplateService {
             case AHORRO_VUELTO_EDICION_DE_AHORRO:
                 return "Ahorro Vuelto - Programación Cambiado con Éxito";
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "Ahorro Vuelto - Programación Efectuada con Éxito";
+                return "Ahorro Vuelto - Registrado con Éxito";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
                 return "Ahorro Programado - Ejecución Efectuada con Êxito";
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
                 return "Ahorro Programado - Ejecución no Pudo ser Completada";
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-                return "Ahorro Programado - Programación Efectuada con Éxito";
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
+                return "Ahorro Programado – Programación Exitosa";
+            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
                 return "Ahorro Programado - Transferencia Parcialmente Realizada";
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
                 return "Ahorro Programado - Programación Cambiado con Éxito";
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
                 return "Ahorro Programado - Programación Eliminado con Éxito";
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+                return "Ahorro Programado - Desactivado";
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
             case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
                 return "";
@@ -159,6 +163,7 @@ public class TemplateService {
             case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
+            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
                 return "Información de la Programación";
 
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
@@ -177,15 +182,16 @@ public class TemplateService {
             case AHORRO_VUELTO_AHORRO_PROGRAMADO:
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
             case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
             case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
             case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
             case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
             case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
+            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
                 return "";
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
                 return "No se pudo realizar el abono a la cuenta solicitada. Te recomendamos revisar si la cuenta de retiro tiene fondos. También puede llmarmos a nuestra Banca Telefónica: Lima (01) 631-9000 Provincias 0-801-0-0456";
-
+            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
+                return "Tu servicio de ahorro ha sido desactivado. Puedo comunicarse con nuestra Banca Telefónica: Lima (01) 631-9000 Provincias: 0-801-0-0456";
             default:
                 throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
         }
