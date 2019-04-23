@@ -13,7 +13,7 @@ mvn clean -DskipTests fabric8:deploy -Popenshift
 
 Existem templates de envio de e-mail mapeados, cada um deles tem seu set de variáveis para ser enviada, segue relação abaixo: 
 
-* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO
+* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO - Registro da Programação de Ahorro
 
     ```json
         {
@@ -79,7 +79,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
             ]
         }
     ```
-* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO
+* AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO - Execução completa e com êxito de ahorro
 
     ```json
         {
@@ -140,7 +140,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_VUELTO_AHORRO_PROGRAMADO
+* AHORRO_VUELTO_AHORRO_PROGRAMADO - Registro do ahorro vuelto
 
     ```json
         {
@@ -201,7 +201,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA
+* AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA - Houve um problema (ex. falta de fundos na conta)
 
     ```json
         {
@@ -262,7 +262,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
  
-* AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL
+* AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL - Houve uma transferência parcial de ahorro, faltou valores
 
     ```json
         {
@@ -329,7 +329,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_EDICION_DE_AHORRO
+* AHORRO_PROGRAMADO_EDICION_DE_AHORRO - Ahorro programado foi alterado
 
     ```json
         {
@@ -396,7 +396,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
 
-* AHORRO_VUELTO_EDICION_DE_AHORRO
+* AHORRO_VUELTO_EDICION_DE_AHORRO - Ahorro Vuelto foi alterado
 
     ```json
         {
@@ -457,7 +457,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_VUELTO_SUPRESSION_DE_AHORRO
+* AHORRO_VUELTO_SUPRESSION_DE_AHORRO - Ahorro vuelto foi removido
 
     ```json
         {
@@ -494,7 +494,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO
+* AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO - Ahorro programado foi removido
 
     ```json
         {
@@ -537,7 +537,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO
+* AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO - Ahorro programado foi desativado por excesso de tentativas
 
     ```json
         {
@@ -580,7 +580,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* DISPOSICION_EFECTIVO_OPERACION_COMPLETADA
+* DISPOSICION_EFECTIVO_OPERACION_COMPLETADA - Operação realizada com sucesso de disposição de efetivo
 
     ```json
         {
@@ -677,7 +677,7 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
         }
     ```
     
-* DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA
+* DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA - Houve um erro na disposição de efetivo
 
     ```json
         {
