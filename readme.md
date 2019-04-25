@@ -126,6 +126,12 @@ Existem templates de envio de e-mail mapeados, cada um deles tem seu set de vari
                 },
                 {
                     "tag": {
+                        "clave": "Código IBS"
+                    },
+                    "valor": "XXX999"
+                },
+                {
+                    "tag": {
                         "clave": "Frecuencia"
                     },
                     "valor": "Diario"
