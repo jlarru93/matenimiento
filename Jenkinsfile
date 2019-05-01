@@ -7,7 +7,7 @@ podTemplate(label: "maven",
   inheritFrom: "maven") {
     node("maven") {
 
-        def namespace = "email"
+        def namespace = "email-service"
 
         stage('Clone repository') {
             checkout scm
