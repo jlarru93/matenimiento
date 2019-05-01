@@ -78,3 +78,6 @@ spec:
                 configMapKeyRef:
                   name: spring-correo-eletronico-service
                   key: spring.data.mongodb.port
+
+            - name: TZ
+              value: 'America/Lima'
