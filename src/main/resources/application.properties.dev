@@ -4,6 +4,7 @@ spring.mail.username=gabriel.schaidhauer.ntconsult
 spring.mail.password=S3gur4nc4+
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+server.port=8083
 
 spring.data.mongodb.database=email-service
 #spring.data.mongodb.host=${MONGO_HOST}
