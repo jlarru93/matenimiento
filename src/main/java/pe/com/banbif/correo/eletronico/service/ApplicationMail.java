@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 @EnableMongoRepositories
-public class Application {
+public class ApplicationMail {
 
     public static void main(String... args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(ApplicationMail.class, args);
     }
 }
