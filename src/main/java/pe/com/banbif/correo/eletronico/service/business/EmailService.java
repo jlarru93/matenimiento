@@ -1,6 +1,8 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -47,16 +49,23 @@ public class EmailService {
 
     @Scheduled(fixedDelay = 10000L)
     public void processList() {
-        this.repository.findAll().forEach(email -> {
-            try {
-                sendMail(email);
-                sendLogService.log(email);
-            } catch (Exception ex) {
-                errorLogService.log(ex, email);
-            }
+        int page = 0;
+        int count = 10;
+        Page<Email> emailsPages = null;
 
-            this.repository.delete(email);
-        });
+        do {
+            emailsPages = this.repository.findAll(PageRequest.of(page, count));
+            this.repository.deleteAll(emailsPages.getContent());
+            emailsPages.forEach(email -> {
+                try {
+                    sendMail(email);
+                    sendLogService.log(email);
+                } catch (Exception ex) {
+                    errorLogService.log(ex, email);
+                }
+            });
+            page++;
+        } while (emailsPages.hasNext());
     }
 
     private void sendMail(Email email) throws MessagingException {
