@@ -3,6 +3,7 @@ package pe.com.banbif.correo.eletronico.service.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,10 +41,16 @@ public class EmailTagController {
 	public ResponseEntity<EmailTag> get(@PathVariable("id") String id) {
 		return ResponseEntity.ok(emailTagService.findById(id));
 	}
+	
 	@GetMapping("/list/{tiposCorreos}")
 	public ResponseEntity<List<EmailTag>> get(@PathVariable("tiposCorreos") TiposCorreos tiposCorreos) {
 		return ResponseEntity.ok(emailTagService.findByTiposCorreos(tiposCorreos));
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<EmailTag> delete(@PathVariable("id") String id) {
+		return ResponseEntity.ok(emailTagService.delete(id));
+	}
+	
 
 }
