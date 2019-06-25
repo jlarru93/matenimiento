@@ -1,5 +1,10 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
+import java.util.Objects;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,16 +13,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
+
+import io.swagger.model.Correo;
+import io.swagger.model.Destinatario;
+import io.swagger.model.Remetente;
+import io.swagger.model.TemplateCorreo;
 import pe.com.banbif.correo.eletronico.service.data.entity.Email;
 import pe.com.banbif.correo.eletronico.service.data.repository.EmailRepository;
-import pe.com.banbif.correo.eletronico.service.model.Correo;
-import pe.com.banbif.correo.eletronico.service.model.Destinatario;
-import pe.com.banbif.correo.eletronico.service.model.Remetente;
-import pe.com.banbif.correo.eletronico.service.model.TemplateCorreo;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.util.Objects;
 
 @Service
 public class EmailService {

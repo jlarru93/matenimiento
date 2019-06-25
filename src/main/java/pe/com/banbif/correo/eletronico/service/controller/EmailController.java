@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.model.Correo;
+import io.swagger.model.PostCorreoResponse;
 import pe.com.banbif.correo.eletronico.service.business.EmailService;
 
-import pe.com.banbif.correo.eletronico.service.model.Correo;
-import pe.com.banbif.correo.eletronico.service.model.PostCorreoResponse;
-
-@RestController
+@RestController("/")
 public class EmailController {
 
     private final EmailService emailService;
@@ -20,9 +20,11 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<PostCorreoResponse> queueEmail(@RequestBody Correo email) {
         PostCorreoResponse response = new PostCorreoResponse().datos(this.emailService.queueEmail(email));
         return ResponseEntity.ok(response);
     }
+    
+    
 }

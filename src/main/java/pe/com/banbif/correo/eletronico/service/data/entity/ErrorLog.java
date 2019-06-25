@@ -1,9 +1,9 @@
 package pe.com.banbif.correo.eletronico.service.data.entity;
 
-import org.springframework.data.annotation.Id;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import org.springframework.data.annotation.Id;
 
 public class ErrorLog {
 

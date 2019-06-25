@@ -1,11 +1,12 @@
 package pe.com.banbif.correo.eletronico.service.data.entity;
 
-import org.springframework.data.annotation.Id;
-
-import pe.com.banbif.correo.eletronico.service.model.TiposCorreos;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import org.springframework.data.annotation.Id;
+
+import io.swagger.model.TiposCorreos;
 
 public class Email {
 

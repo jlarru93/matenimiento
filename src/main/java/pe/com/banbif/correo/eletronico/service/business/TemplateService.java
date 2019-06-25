@@ -1,36 +1,68 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
-import pe.com.banbif.correo.eletronico.service.model.*;
-
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.Version;
+import io.swagger.model.Correo;
+import io.swagger.model.TagCorreo;
+import io.swagger.model.TiposCorreos;
+import io.swagger.model.ValorTag;
+import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
+
 @Service
 public class TemplateService {
 
-    private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = "Template not found";
-    private final TemplateEngine templateEngine;
 
-    @Autowired
-    public TemplateService(final TemplateEngine templateEngine) {
-        this.templateEngine = templateEngine;
+    private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = null;
+
+	public String getContent(Correo email) {
+    	return buildMail(email);
     }
 
-    public String getContent(Correo email) {
-        return this.templateEngine.process(
-                getTemplate(email.getTemplateCorreo().getTipoCorreo()),
-                getContext(generateContent(email))
-        );
+    public String buildMail(Correo email) {
+    	try {
+    		String template = "<html><body>***** <b>${TESTE}</b></body></html>";
+    		Map<String, Object> model = getModel(email);
+    		Version version = new Version("2.3.28");
+    		Configuration cfg = new Configuration(version);
+    		cfg.setObjectWrapper(new DefaultObjectWrapper(version));
+    		
+    		Template t = new Template("templateName", new StringReader(template), cfg);
+    		
+    		Writer out = new StringWriter();
+    		t.process(model, out);
+    		
+    		return  out.toString();
+			
+		} catch (Exception e) {
+			  throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+		}
     }
+    
+    private Map<String, Object> getModel(Correo email) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	for (ValorTag tag : email.getValoresTags()) {
+			map.put(tag.getTag().getClave(), tag.getValor());
+		}
+    	
+    	return map;
+	}
 
-    public Map<String, Object> toMap(List<ValorTag> tags) {
+	public Map<String, Object> toMap(List<ValorTag> tags) {
         Map<String, Object> mappedValues = new LinkedHashMap<>();
         tags.forEach(tag -> {
             mappedValues.put(tag.getTag().getClave(), tag.getValor());
