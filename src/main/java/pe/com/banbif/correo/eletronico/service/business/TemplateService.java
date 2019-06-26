@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
@@ -20,6 +21,7 @@ import io.swagger.model.Correo;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.TiposCorreos;
 import io.swagger.model.ValorTag;
+import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
 import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
 
 @Service
@@ -27,20 +29,25 @@ public class TemplateService {
 
 
     private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = null;
-
-	public String getContent(Correo email) {
-    	return buildMail(email);
+	private EmailContentService emailContentService;
+    
+    
+    public TemplateService(EmailContentService emailContentService) {
+		this.emailContentService = emailContentService;
     }
 
-    public String buildMail(Correo email) {
+	public String getContent(Correo email) {
     	try {
-    		String template = "<html><body>***** <b>${TESTE}</b></body></html>";
+    		Optional<EmailContent> emailContent = emailContentService.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo());
+    		emailContent.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
+    		String template = emailContent.get().getContent();
+    		
     		Map<String, Object> model = getModel(email);
     		Version version = new Version("2.3.28");
     		Configuration cfg = new Configuration(version);
     		cfg.setObjectWrapper(new DefaultObjectWrapper(version));
     		
-    		Template t = new Template("templateName", new StringReader(template), cfg);
+    		Template t = new Template("template", new StringReader(template), cfg);
     		
     		Writer out = new StringWriter();
     		t.process(model, out);
@@ -48,10 +55,10 @@ public class TemplateService {
     		return  out.toString();
 			
 		} catch (Exception e) {
-			  throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
+			  throw new RuntimeException(e.getMessage());
 		}
     }
-    
+
     private Map<String, Object> getModel(Correo email) {
     	Map<String, Object> map = new HashMap<String, Object>();
     	
