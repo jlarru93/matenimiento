@@ -1,5 +1,6 @@
 package pe.com.banbif.correo.eletronico.service.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,11 @@ public class EmailTagController {
 
 	@PostMapping
 	public ResponseEntity<PostEmailTagResponse> post(@RequestHeader Map<String, String> headers, @RequestBody EmailTag emailTag) {
+		return ResponseEntity.ok(emailTagService.save(headers, emailTag));
+	}
+	
+	@PostMapping("/list")
+	public ResponseEntity<GetEmailTagResponse> post(@RequestHeader Map<String, String> headers, @RequestBody List<EmailTag> emailTag) {
 		return ResponseEntity.ok(emailTagService.save(headers, emailTag));
 	}
 	
