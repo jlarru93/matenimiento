@@ -17,10 +17,10 @@ public class GetEmailContentResponseBuilder {
 		return build(headers, Arrays.asList(emailContent));
 	}
 	
-	public GetEmailContentResponse build(Map<String, String> headers, List<EmailContent> emailContent) {
+	public GetEmailContentResponse build(Map<String, String> headers, List<EmailContent> contents) {
 		GetEmailContentResponse response = new GetEmailContentResponse();
-		response.setDatos(emailContent);
-		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers));
+		response.setDatos(contents);
+		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers, contents.size()));
 		return response;
 	}
 	

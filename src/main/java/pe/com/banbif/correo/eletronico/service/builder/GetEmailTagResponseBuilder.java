@@ -20,7 +20,7 @@ public class GetEmailTagResponseBuilder {
 	public GetEmailTagResponse build(Map<String, String> headers, List<EmailTag> tags) {
 		GetEmailTagResponse response = new GetEmailTagResponse();
 		response.setDatos(tags);
-		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers));
+		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers, tags.size()));
 		return response;
 	}
 	
