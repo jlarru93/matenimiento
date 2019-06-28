@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -167,9 +168,42 @@ public class EmailContentServiceTest extends CommonsTest{
 		emailContent.setId("saved");
 		when(emailContentRepository.findById(anyString())).thenReturn(Optional.empty());
 		
-		RespuestaServicio delete = emailContentService.delete(getHeaders(), "saved");
+		emailContentService.delete(getHeaders(), "saved");
+		fail("fail");
+	}
+	
+	@Test
+	public void findByUniqueKeySucessTest() {
+		EmailContent emailContent = getEmailContent();
+		emailContent.setTiposCorreos(TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA);
+		emailContent.setId("saved");
+		when(emailContentRepository.findByTiposCorreos(any())).thenReturn(Optional.of(emailContent));
 		
-		assertTrue(delete.getMeta().getIdTransaccion() != null);
+		GetEmailContentResponse findByUniqueKey = emailContentService.findByUniqueKey(getHeaders(), TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA);
+	
+		EmailContent e = findByUniqueKey.getDatos().iterator().next();
+		
+		assertTrue("saved".equalsIgnoreCase(e.getId()));
+	}
+	
+	@Test(expected = NotFoundException.class)
+	public void findByUniqueKeyTest() {
+		EmailContent emailContent = getEmailContent();
+		emailContent.setTiposCorreos(TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA);
+		emailContent.setId("saved");
+		when(emailContentRepository.findByTiposCorreos(any())).thenReturn(Optional.empty());
+		
+		emailContentService.findByUniqueKey(getHeaders(), TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA);
+		fail("fail");
+		
+	}
+	
+	@Test
+	public void listSucessTest() {
+		when(emailContentRepository.findAll()).thenReturn(Arrays.asList(getEmailContent(), getEmailContent()));
+		GetEmailContentResponse response = emailContentService.list(getHeaders());
+		
+		assertTrue(response.getMeta().getTotalRegistros() == 2);
 	}
 	
 	
