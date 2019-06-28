@@ -12,6 +12,6 @@ public interface EmailTagRepository extends MongoRepository<EmailTag, String> {
 
 	Optional<List<EmailTag>> findByTiposCorreos(TiposCorreos tiposCorreos);
 
-	Optional<EmailTag> findByTiposCorreosAndValorTagTagClave(TiposCorreos tiposCorreos, String Clave);
+	Optional<EmailTag> findByTiposCorreosAndTagCorreoClave(TiposCorreos tiposCorreos, String Clave);
 
 }

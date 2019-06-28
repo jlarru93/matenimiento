@@ -112,10 +112,10 @@ public class EmailTagService {
 	}
 	
 	public Optional<EmailTag> getByUniqueKey(EmailTag emailTag) {
-		String clave = emailTag.getValorTag().getTag().getClave();
+		String clave = emailTag.getTagCorreo().getClave();
 		TiposCorreos tc = emailTag.getTiposCorreos();
 
-		return emailTagRepository.findByTiposCorreosAndValorTagTagClave(tc, clave);
+		return emailTagRepository.findByTiposCorreosAndTagCorreoClave(tc, clave);
 	}
 
 	public EmailTag delete(String id) {

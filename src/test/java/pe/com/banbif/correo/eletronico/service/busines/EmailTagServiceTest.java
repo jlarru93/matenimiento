@@ -50,7 +50,7 @@ public class EmailTagServiceTest extends CommonsTest {
 		ec.setId("ac");
 		ec.setTiposCorreos(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
 		
-		when(emailTagRepository.findByTiposCorreosAndValorTagTagClave(any(), any())).thenReturn(Optional.of(ec));	
+		when(emailTagRepository.findByTiposCorreosAndTagCorreoClave(any(), any())).thenReturn(Optional.of(ec));	
 		
 		emailTagService.save(ec);
 		
@@ -119,7 +119,7 @@ public class EmailTagServiceTest extends CommonsTest {
 		
 		when(emailTagRepository.findByTiposCorreos(any())).thenReturn(Optional.empty());	
 		when(emailTagRepository.findById(anyString())).thenReturn(Optional.of(emailTag));		
-		when(emailTagRepository.findByTiposCorreosAndValorTagTagClave(any(), any())).thenReturn(Optional.of(e));		
+		when(emailTagRepository.findByTiposCorreosAndTagCorreoClave(any(), any())).thenReturn(Optional.of(e));		
 		
 		emailTagService.update(getHeaders(), emailTag);
 		

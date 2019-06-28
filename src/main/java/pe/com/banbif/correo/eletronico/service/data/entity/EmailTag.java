@@ -1,13 +1,13 @@
 package pe.com.banbif.correo.eletronico.service.data.entity;
 
+import io.swagger.model.TagCorreo;
 import io.swagger.model.TiposCorreos;
-import io.swagger.model.ValorTag;
 
 public class EmailTag {
 
 	private String id;
 	private TiposCorreos tiposCorreos;
-	private ValorTag valorTag;
+	private TagCorreo tagCorreo;
 
 	public TiposCorreos getTiposCorreos() {
 		return tiposCorreos;
@@ -25,13 +25,12 @@ public class EmailTag {
 		this.id = id;
 	}
 
-	public ValorTag getValorTag() {
-		return valorTag;
+	public TagCorreo getTagCorreo() {
+		return tagCorreo;
 	}
 
-	public void setValorTag(ValorTag valorTag) {
-		this.valorTag = valorTag;
+	public void setTagCorreo(TagCorreo tagCorreo) {
+		this.tagCorreo = tagCorreo;
 	}
-
 
 }
