@@ -81,12 +81,14 @@ public class TemplateService {
     public List<ValorTag> fromMap(Map<String, Object> values) {
         List<ValorTag> tags = new ArrayList<>();
         values.forEach((key, value) -> {
-            ValorTag tag = new ValorTag();
-            TagCorreo tagCorreo = new TagCorreo();
-            tagCorreo.setClave(key);
-            tag.setTag(tagCorreo);
-            tag.setValor(value.toString());
-            tags.add(tag);
+        	if(value != null) {
+        		ValorTag tag = new ValorTag();
+        		TagCorreo tagCorreo = new TagCorreo();
+        		tagCorreo.setClave(key);
+        		tag.setTag(tagCorreo);
+        		tag.setValor(value.toString());
+        		tags.add(tag);
+        	}
         });
 
         return tags;
