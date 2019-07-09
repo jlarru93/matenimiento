@@ -29,4 +29,16 @@
     <file path="emailTag_disposicion_efectivo_sucess.js"/>
     <file path="emailContent_disposicion_efectivo_sucess.js"/>
     
+    <file path="emailTag_disposicion_efectivo_error.js"/>
+    <file path="emailContent_disposicion_efectivo_error.js"/>  
+      
+    <file path="emailTag_login_ips.js"/>
+    <file path="emailContent_login_ips.js"/>
+    
+    <file path="emailTag_login_canais.js"/>
+    <file path="emailContent_login_canais.js"/>
+        
+    <file path="emailTag_login_ambos.js"/>
+    <file path="emailContent_login_ambos.js"/>
+    
 </changeFiles>

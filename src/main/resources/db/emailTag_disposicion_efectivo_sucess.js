@@ -1,5 +1,5 @@
 // mongeez formatted javascript
-// changeset martinelli:emailTag__disposicion_efectivo_sucess
+// changeset martinelli:emailTag_disposicion_efectivo_sucess
 
 db.emailTag.insert({
 	"tiposCorreos" : "DISPOSICION_EFECTIVO_OPERACION_COMPLETADA", tagCorreo :

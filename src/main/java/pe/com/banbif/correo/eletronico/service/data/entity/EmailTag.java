@@ -10,9 +10,6 @@ public class EmailTag {
 	private TagCorreo tagCorreo;
 
 	public TiposCorreos getTiposCorreos() {
-//		TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_COMPLETADA;
-//		TiposCorreos.DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA;
-		
 		return tiposCorreos;
 	}
 
