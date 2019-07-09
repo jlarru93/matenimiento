@@ -26,4 +26,7 @@
     <file path="emailTag_ahorro_vuelto_eliminado.js"/>
     <file path="emailContent_ahorro_vuelto_eliminado.js"/>
     
+    <file path="emailTag_disposicion_efectivo_sucess.js"/>
+    <file path="emailContent_disposicion_efectivo_sucess.js"/>
+    
 </changeFiles>
