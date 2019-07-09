@@ -10,6 +10,7 @@ public class EmailTag {
 	private TagCorreo tagCorreo;
 
 	public TiposCorreos getTiposCorreos() {
+//		TiposCorreos.AHORRO_VUELTO_EDICION_DE_AHORRO
 		return tiposCorreos;
 	}
 

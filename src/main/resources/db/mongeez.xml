@@ -1,0 +1,29 @@
+<changeFiles>
+    <file path="emailTag_ahorro_programado_programado.js"/>
+    <file path="emailContent_ahorro_programado_programado.js"/>
+    
+    <file path="emailTag_ahorro_programado_parcial.js"/>
+    <file path="emailContent_ahorro_programado_parcial.js"/>
+    
+    <file path="emailTag_ahorro_programado_ejecutado.js"/>
+    <file path="emailContent_ahorro_programado_ejecutado.js"/>
+    
+    <file path="emailTag_ahorro_programado_incompleto.js"/>
+    <file path="emailContent_ahorro_programado_incompleto.js"/>
+    
+    <file path="emailTag_ahorro_programado_cambiado.js"/>
+    <file path="emailContent_ahorro_programado_cambiado.js"/>
+    
+    <file path="emailTag_ahorro_programado_eliminado.js"/>
+    <file path="emailContent_ahorro_programado_eliminado.js"/>
+    
+    <file path="emailTag_ahorro_vuelto_programado.js"/>
+    <file path="emailContent_ahorro_vuelto_programado.js"/>
+    
+    <file path="emailTag_ahorro_vuelto_cambiado.js"/>
+    <file path="emailContent_ahorro_vuelto_cambiado.js"/>
+    
+    <file path="emailTag_ahorro_vuelto_eliminado.js"/>
+    <file path="emailContent_ahorro_vuelto_eliminado.js"/>
+    
+</changeFiles>
