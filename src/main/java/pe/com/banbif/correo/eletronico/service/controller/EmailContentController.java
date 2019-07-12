@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.model.EmailContent;
+import io.swagger.model.GetEmailContentResponse;
+import io.swagger.model.PostEmailContentResponse;
+import io.swagger.model.PutEmailContentResponse;
 import io.swagger.model.RespuestaServicio;
 import io.swagger.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.business.EmailContentService;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
-import pe.com.banbif.correo.eletronico.service.data.entity.GetEmailContentResponse;
-import pe.com.banbif.correo.eletronico.service.data.entity.PostEmailContentResponse;
-import pe.com.banbif.correo.eletronico.service.data.entity.PutEmailContentResponse;
 
 @RestController()
-@RequestMapping("/content")
+@RequestMapping("/correos/content")
 public class EmailContentController {
 
 	private EmailContentService emailContentService;
@@ -51,7 +51,7 @@ public class EmailContentController {
 		return ResponseEntity.ok(emailContentService.list(headers));
 	}
 	
-	@GetMapping("/list/{tiposCorreos}")
+	@GetMapping("/tiposcorreos/{tiposCorreos}")
 	public ResponseEntity<GetEmailContentResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("tiposCorreos") TiposCorreos tiposCorreos) {
 		return ResponseEntity.ok(emailContentService.findByUniqueKey(headers, tiposCorreos));
 	}

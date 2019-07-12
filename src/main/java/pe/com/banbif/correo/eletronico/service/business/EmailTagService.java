@@ -1,6 +1,5 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,16 +43,6 @@ public class EmailTagService {
 	public PostEmailTagResponse save(Map<String, String> headers, EmailTag emailTag) {
 		EmailTag save = save(emailTag);
 		return PostEmailTagResponseBuilder.getInstace().build(headers, save);
-	}
-	
-	public GetEmailTagResponse save(Map<String, String> headers, List<EmailTag> emailTags) {
-		List<EmailTag> tags = new ArrayList<EmailTag>();
-		for (EmailTag et : emailTags) {
-			EmailTag save = save(et);
-			tags.add(save);
-		}
-		
-		return GetEmailTagResponseBuilder.getInstace().build(headers, tags);
 	}
 	
 	public EmailTag update(EmailTag emailTag) {

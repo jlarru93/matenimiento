@@ -2,8 +2,8 @@ package pe.com.banbif.correo.eletronico.service.builder;
 
 import java.util.Map;
 
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
-import pe.com.banbif.correo.eletronico.service.data.entity.PutEmailContentResponse;
+import io.swagger.model.EmailContent;
+import io.swagger.model.PutEmailContentResponse;
 
 public class PutEmailContentResponseBuilder {
 	

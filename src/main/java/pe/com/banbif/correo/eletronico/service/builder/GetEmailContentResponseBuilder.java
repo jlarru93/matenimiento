@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
-import pe.com.banbif.correo.eletronico.service.data.entity.GetEmailContentResponse;
+import io.swagger.model.EmailContent;
+import io.swagger.model.GetEmailContentResponse;
 
 public class GetEmailContentResponseBuilder {
 	

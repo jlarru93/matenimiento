@@ -6,16 +6,16 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import io.swagger.model.EmailContent;
+import io.swagger.model.GetEmailContentResponse;
+import io.swagger.model.PostEmailContentResponse;
+import io.swagger.model.PutEmailContentResponse;
 import io.swagger.model.RespuestaServicio;
 import io.swagger.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.builder.GetEmailContentResponseBuilder;
 import pe.com.banbif.correo.eletronico.service.builder.PostEmailContentResponseBuilder;
 import pe.com.banbif.correo.eletronico.service.builder.PutEmailContentResponseBuilder;
 import pe.com.banbif.correo.eletronico.service.builder.RespuestaServicioBuilder;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
-import pe.com.banbif.correo.eletronico.service.data.entity.GetEmailContentResponse;
-import pe.com.banbif.correo.eletronico.service.data.entity.PostEmailContentResponse;
-import pe.com.banbif.correo.eletronico.service.data.entity.PutEmailContentResponse;
 import pe.com.banbif.correo.eletronico.service.data.repository.EmailContentRepository;
 import pe.com.banbif.correo.eletronico.service.exception.AlreadyExistsException;
 import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;

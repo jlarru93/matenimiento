@@ -1,6 +1,5 @@
 package pe.com.banbif.correo.eletronico.service.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ import pe.com.banbif.correo.eletronico.service.data.entity.PostEmailTagResponse;
 import pe.com.banbif.correo.eletronico.service.data.entity.PutEmailTagResponse;
 
 @RestController()
-@RequestMapping("/tag")
+@RequestMapping("/correos/tag")
 public class EmailTagController {
 
 	private EmailTagService emailTagService;
@@ -37,11 +36,6 @@ public class EmailTagController {
 		return ResponseEntity.ok(emailTagService.save(headers, emailTag));
 	}
 	
-	@PostMapping("/list")
-	public ResponseEntity<GetEmailTagResponse> post(@RequestHeader Map<String, String> headers, @RequestBody List<EmailTag> emailTag) {
-		return ResponseEntity.ok(emailTagService.save(headers, emailTag));
-	}
-	
 	@PutMapping
 	public ResponseEntity<PutEmailTagResponse> put(@RequestHeader Map<String, String> headers, @RequestBody EmailTag emailTag) {
 		return ResponseEntity.ok(emailTagService.update(headers, emailTag));
@@ -52,7 +46,7 @@ public class EmailTagController {
 		return ResponseEntity.ok(emailTagService.findById(headers, id));
 	}
 	
-	@GetMapping("/list/{tiposCorreos}")
+	@GetMapping("/tiposcorreos/{tiposCorreos}")
 	public ResponseEntity<GetEmailTagResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("tiposCorreos") TiposCorreos tiposCorreos) {
 		return ResponseEntity.ok(emailTagService.findByTiposCorreos(headers, tiposCorreos));
 	}

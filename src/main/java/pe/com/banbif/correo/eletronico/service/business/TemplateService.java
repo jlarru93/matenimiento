@@ -17,9 +17,9 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.Version;
 import io.swagger.model.Correo;
+import io.swagger.model.EmailContent;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.ValorTag;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
 
 @Service
 public class TemplateService {

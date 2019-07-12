@@ -12,13 +12,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.swagger.model.Correo;
+import io.swagger.model.EmailContent;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TiposCorreos;
 import io.swagger.model.ValorTag;
 import pe.com.banbif.correo.eletronico.service.business.EmailContentService;
 import pe.com.banbif.correo.eletronico.service.business.TemplateService;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
 
 public class TemplateServiceTest {
 	

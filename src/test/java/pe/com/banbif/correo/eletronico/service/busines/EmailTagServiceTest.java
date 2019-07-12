@@ -73,22 +73,6 @@ public class EmailTagServiceTest extends CommonsTest {
 	}
 	
 	@Test
-	public void saveListCanonicoTest() {
-		EmailTag emailTag = getEmailTag();
-		emailTag.setTiposCorreos(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
-		emailTag.setId("saved");
-		
-		when(emailTagRepository.findByTiposCorreos(any())).thenReturn(Optional.empty());	
-		when(emailTagRepository.save(any())).thenReturn(emailTag);		
-		GetEmailTagResponse response = emailTagService.save(getHeaders(), Arrays.asList(emailTag, emailTag));
-		
-		
-		assertTrue(response.getMeta().getIdTransaccion() != null);
-		assertTrue(response.getDatos().size() == 2);
-		
-	}
-	
-	@Test
 	public void putSucessCanonicoTest() {
 		EmailTag emailTag = getEmailTag();
 		emailTag.setTiposCorreos(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);

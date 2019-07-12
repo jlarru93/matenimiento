@@ -3,8 +3,8 @@ package pe.com.banbif.correo.eletronico.service.builder;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.swagger.model.EmailContent;
 import io.swagger.model.TagCorreo;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailContent;
 import pe.com.banbif.correo.eletronico.service.data.entity.EmailTag;
 
 public class CommonsTest {

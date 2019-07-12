@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import pe.com.banbif.correo.eletronico.service.data.entity.PostEmailContentResponse;
+import io.swagger.model.PostEmailContentResponse;
 
 public class PostEmailContentResponseBuilderTest extends CommonsTest{
 	
