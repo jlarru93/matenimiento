@@ -3,30 +3,29 @@ package pe.com.banbif.correo.eletronico.service.builder;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.swagger.model.EmailContent;
+import io.swagger.model.CodigosCanales;
 import io.swagger.model.TagCorreo;
-import pe.com.banbif.correo.eletronico.service.data.entity.EmailTag;
+import io.swagger.model.TemplateCorreo;
 
 public class CommonsTest {
 
-	protected EmailContent getEmailContent() {
-		EmailContent e = new EmailContent();
+	protected TemplateCorreo getTemplateCorreo() {
+		TemplateCorreo e = new TemplateCorreo();
 		return e;
 	}
 	
 	protected Map<String, String> getHeaders() {
 		 Map<String, String> map = new HashMap<String, String>();
+		 map.put("codigoCanal", CodigosCanales.BACKOFFICE.getValue());
 		return map;
 	}
 	
 
-	protected EmailTag getEmailTag() {
-		EmailTag e = new EmailTag();
+	protected TagCorreo getEmailTag() {
 		TagCorreo tag = new TagCorreo();
 		tag.setClave("ab");
 		tag.setDescripicion("ab");
-		e.setTagCorreo(tag);
-		return e;
+		return tag;
 	}
 	
 	

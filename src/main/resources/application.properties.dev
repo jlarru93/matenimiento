@@ -1,7 +1,7 @@
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
-spring.mail.username=gabriel.schaidhauer.ntconsult
-spring.mail.password=S3gur4nc4+
+spring.mail.username=filipe.chaves.nt
+spring.mail.password=1234!@#$
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 mongeez.enabled = false

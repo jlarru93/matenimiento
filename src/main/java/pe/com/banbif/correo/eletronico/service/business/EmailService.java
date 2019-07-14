@@ -1,12 +1,13 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,7 +35,6 @@ public class EmailService {
     private final SendLogService sendLogService;
     private final ErrorLogService errorLogService;
 
-    @Autowired
     public EmailService(
             final EmailRepository repository,
             final TemplateService templateService,
@@ -75,9 +75,15 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setFrom(email.getFrom());
-        helper.setTo(email.getTo());
+        
+        String[] split = email.getTo().split(";");
+        helper.setTo(split[split.length-1]);
+        if(split.length > 1) {
+        	helper.setBcc(Arrays.copyOfRange(split, 0, split.length-1));
+        }
+        
         helper.setSubject(email.getSubject());
-        helper.setText(email.getEmailContent(), true);
+        helper.setText(email.getTemplateCorreo(), true);
 
         if (Objects.nonNull(email.getBcc()) && !email.getBcc().isEmpty()) {
             helper.setBcc(email.getBcc().toArray(new String[0]));
@@ -87,34 +93,53 @@ public class EmailService {
     }
 
 
-    public Correo queueEmail(Correo email) {
-        if (!isValid(email)) {
+    public Correo queueEmail(Correo correo) {
+        if (!isValid(correo)) {
             throw new RuntimeException(INVALID_EMAIL_ERROR_MESSAGE);
         }
+        
+        Optional<TemplateCorreo> templateCorreo = templateService.getTemplate(correo);
 
-        String emailContent = templateService.getContent(email);
+        String contenido = templateService.getContent(correo, templateCorreo.get());
 
-        if (StringUtils.isEmpty(emailContent)) {
+        if (StringUtils.isEmpty(contenido)) {
             throw new RuntimeException(TEMPLATE_GENERATION_ERROR);
         }
-
-        email.getTemplateCorreo().setContenido(emailContent);
-        return fromEmail(this.repository.save(toEmail(email)));
+        
+        if(templateCorreo.get().isEnvioCorreoCliente()) {
+        	String enderecoCorreo = templateCorreo.get().getDestinatario().getEnderecoCorreo();
+        	enderecoCorreo = concatEmailCliente(correo, enderecoCorreo);
+        	templateCorreo.get().getDestinatario().setEnderecoCorreo(enderecoCorreo);
+        }
+        
+        correo.setTemplateCorreo(templateCorreo.get());
+        correo.getTemplateCorreo().setContenido(contenido);
+        
+        
+        return fromEmail(this.repository.save(toEmail(correo)));
     }
+
+	private String concatEmailCliente(Correo correo, String enderecoCorreo) {
+		if(!StringUtils.isBlank(enderecoCorreo)) {
+			enderecoCorreo+= ";";
+		}
+		String mails = enderecoCorreo.concat(correo.getTemplateCorreo().getDestinatario().getEnderecoCorreo());
+		return mails;
+	}
 
     private Correo fromEmail(Email email) {
         Correo correo = new Correo();
         TemplateCorreo templateCorreo = new TemplateCorreo();
 
         templateCorreo
-                .contenido(email.getEmailContent())
+                .contenido(email.getTemplateCorreo())
                 .remetente(new Remetente().enderecoCorreo(email.getFrom()))
                 .asunto(email.getSubject())
                 .tipoCorreo(email.getTemplate())
                 .destinatario(new Destinatario().enderecoCorreo(email.getTo()));
 
         correo.templateCorreo(templateCorreo)
-                .codigo(email.getId())
+                .id(email.getId())
                 .valoresTags(templateService.fromMap(email.getTemplateVariables()));
 
         return correo;
@@ -123,7 +148,7 @@ public class EmailService {
 
     private Email toEmail(Correo correo) {
         Email email = new Email();
-        email.setEmailContent(correo.getTemplateCorreo().getContenido());
+        email.setTemplateCorreo(correo.getTemplateCorreo().getContenido());
         email.setFrom(correo.getTemplateCorreo().getRemetente().getEnderecoCorreo());
         email.setSubject(correo.getTemplateCorreo().getAsunto());
         email.setTemplate(correo.getTemplateCorreo().getTipoCorreo());

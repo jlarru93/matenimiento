@@ -2,6 +2,7 @@ package pe.com.banbif.correo.eletronico.service.busines;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -12,36 +13,35 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.swagger.model.Correo;
-import io.swagger.model.EmailContent;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TiposCorreos;
 import io.swagger.model.ValorTag;
-import pe.com.banbif.correo.eletronico.service.business.EmailContentService;
+import pe.com.banbif.correo.eletronico.service.business.TemplateCorreoService;
 import pe.com.banbif.correo.eletronico.service.business.TemplateService;
 
 public class TemplateServiceTest {
 	
 	private TemplateService templateService;
 	@Mock
-	private EmailContentService emailContentService;
+	private TemplateCorreoService TemplateCorreoService;
 	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		templateService = new TemplateService(emailContentService);
+		templateService = new TemplateService(TemplateCorreoService);
 	}
 	
 	@Test
 	public void getContentSucessTest() {
-		when(emailContentService.findByUniqueKey(any())).thenReturn(getContent());		
+		when(TemplateCorreoService.findByUniqueKey(eq(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO),any())).thenReturn(getTemplateCorreo());		
 		
 		Correo email = new Correo();
 		TemplateCorreo templateCorreo = new TemplateCorreo();
 		templateCorreo.setTipoCorreo(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
 		email.setTemplateCorreo(templateCorreo);
 		email.addValoresTagsItem(buildValortagItem());
-		String content = templateService.getContent(email);
+		String content = templateService.getContent(email, templateCorreo);
 		
 		assertTrue("template: valido ".equals(content));
 	}
@@ -55,10 +55,10 @@ public class TemplateServiceTest {
 		return v;
 	}
 
-	private Optional<EmailContent> getContent() {
-		EmailContent e = new EmailContent();
-		e.setContent("template: ${teste} ");
-		e.setTiposCorreos(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
+	private Optional<TemplateCorreo> getTemplateCorreo() {
+		TemplateCorreo e = new TemplateCorreo();
+		e.setContenido("template: ${teste} ");
+		e.setTipoCorreo(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
 		return Optional.of(e);
 	}
 	

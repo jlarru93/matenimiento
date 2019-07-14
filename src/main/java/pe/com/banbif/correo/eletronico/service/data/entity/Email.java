@@ -16,7 +16,7 @@ public class Email {
     private String to;
     private List<String> bcc;
     private String subject;
-    private String emailContent;
+    private String TemplateCorreo;
     private TiposCorreos template;
     private Map<String, Object> templateVariables;
 
@@ -60,12 +60,12 @@ public class Email {
         this.subject = subject;
     }
 
-    public String getEmailContent() {
-        return emailContent;
+    public String getTemplateCorreo() {
+        return TemplateCorreo;
     }
 
-    public void setEmailContent(String emailContent) {
-        this.emailContent = emailContent;
+    public void setTemplateCorreo(String TemplateCorreo) {
+        this.TemplateCorreo = TemplateCorreo;
     }
 
     public TiposCorreos getTemplate() {
@@ -94,14 +94,14 @@ public class Email {
                 Objects.equals(to, email.to) &&
                 Objects.equals(bcc, email.bcc) &&
                 Objects.equals(subject, email.subject) &&
-                Objects.equals(emailContent, email.emailContent) &&
+                Objects.equals(TemplateCorreo, email.TemplateCorreo) &&
                 template == email.template &&
                 Objects.equals(templateVariables, email.templateVariables);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, from, to, bcc, subject, emailContent, template, templateVariables);
+        return Objects.hash(id, from, to, bcc, subject, TemplateCorreo, template, templateVariables);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Email {
                 ", to='" + to + '\'' +
                 ", bcc=" + bcc +
                 ", subject='" + subject + '\'' +
-                ", emailContent='" + emailContent + '\'' +
+                ", TemplateCorreo='" + TemplateCorreo + '\'' +
                 ", template=" + template +
                 ", templateVariables=" + templateVariables +
                 '}';

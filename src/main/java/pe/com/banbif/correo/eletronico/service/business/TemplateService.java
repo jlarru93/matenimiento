@@ -17,33 +17,30 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 import freemarker.template.Version;
 import io.swagger.model.Correo;
-import io.swagger.model.EmailContent;
+import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.ValorTag;
 
 @Service
 public class TemplateService {
 
-	private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = null;
-	private EmailContentService emailContentService;
+	private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = "template invalido";
+	
+	private TemplateCorreoService templateCorreoService;
 
-	public TemplateService(EmailContentService emailContentService) {
-		this.emailContentService = emailContentService;
+	public TemplateService(TemplateCorreoService templateCorreoService) {
+		this.templateCorreoService = templateCorreoService;
 	}
 
-	public String getContent(Correo email) {
+	public String getContent(Correo email, TemplateCorreo template) {
 		try {
-			Optional<EmailContent> emailContent = emailContentService
-					.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo());
-			emailContent.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
-			String template = emailContent.get().getContent();
 
 			Map<String, Object> model = getModel(email);
 			Version version = new Version("2.3.28");
 			Configuration cfg = new Configuration(version);
 			cfg.setObjectWrapper(new DefaultObjectWrapper(version));
 
-			Template t = new Template("template", new StringReader(template), cfg);
+			Template t = new Template("template", new StringReader(template.getContenido()), cfg);
 
 			Writer out = new StringWriter();
 			t.process(model, out);
@@ -53,6 +50,13 @@ public class TemplateService {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
+	}
+
+	public Optional<TemplateCorreo> getTemplate(Correo email) {
+		Optional<TemplateCorreo> TemplateCorreo = templateCorreoService
+				.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo(), email.getTemplateCorreo().getCanal());
+		TemplateCorreo.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
+		return TemplateCorreo;
 	}
 
 	private Map<String, Object> getModel(Correo email) {
