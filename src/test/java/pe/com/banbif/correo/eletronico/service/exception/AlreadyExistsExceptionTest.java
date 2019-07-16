@@ -11,7 +11,7 @@ public class AlreadyExistsExceptionTest {
 		try {
 			throw new AlreadyExistsException();
 		} catch (Exception e) {
-			assertTrue("Ya existe".equalsIgnoreCase(e.getMessage()));
+			assertTrue("¡TemplateCorreo ya existe!".equalsIgnoreCase(e.getMessage()));
 		}
 	}
 	

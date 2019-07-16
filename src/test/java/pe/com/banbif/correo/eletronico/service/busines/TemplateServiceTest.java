@@ -38,6 +38,7 @@ public class TemplateServiceTest {
 		
 		Correo email = new Correo();
 		TemplateCorreo templateCorreo = new TemplateCorreo();
+		templateCorreo.setContenido("template: valido ");
 		templateCorreo.setTipoCorreo(TiposCorreos.AHORRO_PROGRAMADO_AHORRO_PROGRAMADO);
 		email.setTemplateCorreo(templateCorreo);
 		email.addValoresTagsItem(buildValortagItem());

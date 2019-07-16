@@ -10,7 +10,7 @@ public class NotFoundExceptionTest {
 		try {
 			throw new NotFoundException();
 		} catch (Exception e) {
-			assertTrue("Object Not Found".equalsIgnoreCase(e.getMessage()));
+			assertTrue("¡Registro no encontrado!".equalsIgnoreCase(e.getMessage()));
 		}
 	}
 }
