@@ -16,7 +16,7 @@ podTemplate(label: "maven",
         if (env.BRANCH_NAME == "develop") {
 
             stage('Build') {
-                sh "mvn clean install"
+                sh "mvn clean install -Dmaven.wagon.http.ssl.insecure=true"
             }
 
             deployFabric8(
@@ -29,7 +29,7 @@ podTemplate(label: "maven",
         if (env.BRANCH_NAME.contains("release/")) {
 
             stage('Build') {
-              sh "mvn -DskipTests clean package"
+              sh "mvn -DskipTests clean package -Dmaven.wagon.http.ssl.insecure=true"
             }
 
             def tag = tagRelease()
