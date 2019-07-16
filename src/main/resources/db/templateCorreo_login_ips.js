@@ -6,10 +6,8 @@ db.templateCorreo.insert({
   "remetente": {
     "enderecoCorreo": "banbif@banbif.com.pe"
   },
-  "asunto": "",
-
+  "asunto": "Informe: Bloqueo IP Malicioso",
   "destinatario": {
-
     "enderecoCorreo": "banbif@banbif.com.pe"
   },
   "canal": "BANCA_POR_INTERNET",

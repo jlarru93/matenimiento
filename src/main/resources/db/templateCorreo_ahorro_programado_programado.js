@@ -6,10 +6,8 @@ db.templateCorreo.insert({
   "remetente": {
     "enderecoCorreo": "banbif@banbif.com.pe"
   },
-  "asunto": "",
-
+  "asunto": "Informe: Efectuada la programación de lo Ahorro Programado",
   "destinatario": {
-
     "enderecoCorreo": "banbif@banbif.com.pe"
   },
   "canal": "BANCA_POR_INTERNET",
