@@ -1,199 +1,97 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import pe.com.banbif.correo.eletronico.service.dto.EmailTemplateContent;
-import pe.com.banbif.correo.eletronico.service.model.*;
-
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.Version;
+import io.swagger.model.Correo;
+import io.swagger.model.TemplateCorreo;
+import io.swagger.model.TagCorreo;
+import io.swagger.model.ValorTag;
 
 @Service
 public class TemplateService {
 
-    private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = "Template not found";
-    private final TemplateEngine templateEngine;
+	private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = "template invalido";
+	
+	private TemplateCorreoService templateCorreoService;
 
-    @Autowired
-    public TemplateService(final TemplateEngine templateEngine) {
-        this.templateEngine = templateEngine;
-    }
+	public TemplateService(TemplateCorreoService templateCorreoService) {
+		this.templateCorreoService = templateCorreoService;
+	}
 
-    public String getContent(Correo email) {
-        return this.templateEngine.process(
-                getTemplate(email.getTemplateCorreo().getTipoCorreo()),
-                getContext(generateContent(email))
-        );
-    }
+	public String getContent(Correo email, TemplateCorreo template) {
+		try {
 
-    public Map<String, Object> toMap(List<ValorTag> tags) {
-        Map<String, Object> mappedValues = new LinkedHashMap<>();
-        tags.forEach(tag -> {
-            mappedValues.put(tag.getTag().getClave(), tag.getValor());
-        });
+			Map<String, Object> model = getModel(email);
+			Version version = new Version("2.3.28");
+			Configuration cfg = new Configuration(version);
+			cfg.setObjectWrapper(new DefaultObjectWrapper(version));
 
-        return mappedValues;
-    }
+			Template t = new Template("template", new StringReader(template.getContenido()), cfg);
 
-    public List<ValorTag> fromMap(Map<String, Object> values) {
-        List<ValorTag> tags = new ArrayList<>();
-        values.forEach((key, value) -> {
-            ValorTag tag = new ValorTag();
-            TagCorreo tagCorreo = new TagCorreo();
-            tagCorreo.setClave(key);
-            tag.setTag(tagCorreo);
-            tag.setValor(value.toString());
-            tags.add(tag);
-        });
+			Writer out = new StringWriter();
+			t.process(model, out);
 
-        return tags;
-    }
+			return out.toString();
 
-    private Context getContext(EmailTemplateContent email) {
-        final Context context = new Context();
+		} catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 
-        context.setVariable("htmlTitle", email.getHtmlTitle());
-        context.setVariable("title", email.getTitle());
-        context.setVariable("subtitle", email.getSubtitle());
-        context.setVariable("content", email.getContent());
-        context.setVariable("titleDetails", email.getTitleDetails());
+	public Optional<TemplateCorreo> getTemplate(Correo email) {
+		Optional<TemplateCorreo> TemplateCorreo = templateCorreoService
+				.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo(), email.getTemplateCorreo().getCanal());
+		TemplateCorreo.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
+		return TemplateCorreo;
+	}
 
-        return context;
-    }
+	private Map<String, Object> getModel(Correo email) {
+		Map<String, Object> map = new HashMap<String, Object>();
 
-    private EmailTemplateContent generateContent(Correo mail) {
-        EmailTemplateContent emailContent = new EmailTemplateContent();
-        emailContent.setHtmlTitle(getHtmlTitle(mail.getTemplateCorreo().getTipoCorreo()));
-        emailContent.setTitle(getTitle(mail.getTemplateCorreo().getTipoCorreo()));
-        emailContent.setSubtitle(getSubtitle(mail.getTemplateCorreo().getTipoCorreo()));
-        emailContent.setContent(toMap(mail.getValoresTags()));
-        emailContent.setTitleDetails(getTitleDetails(mail.getTemplateCorreo().getTipoCorreo()));
+		for (ValorTag tag : email.getValoresTags()) {
+			map.put(tag.getTag().getClave(), tag.getValor());
+		}
 
-        return emailContent;
-    }
+		return map;
+	}
 
-    private String getTemplate(TiposCorreos template) {
-        switch (template) {
-            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-            case AHORRO_VUELTO_EDICION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-                return "banbif-template.html";
-            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-                return "disposicion-sucess-template.html";
-            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-                return "disposicion-error-template.html";
-            default:
-                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
-        }
-    }
+	public Map<String, Object> toMap(List<ValorTag> tags) {
+		Map<String, Object> mappedValues = new LinkedHashMap<>();
+		tags.forEach(tag -> {
+			mappedValues.put(tag.getTag().getClave(), tag.getValor());
+		});
 
-    private String getHtmlTitle(TiposCorreos template) {
-        switch (template) {
-            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-            case AHORRO_VUELTO_EDICION_DE_AHORRO:
-            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "BanBif - Ahorro Vuelto";
+		return mappedValues;
+	}
 
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
-                return "BanBif - Ahorro Programado";
+	public List<ValorTag> fromMap(Map<String, Object> values) {
+		List<ValorTag> tags = new ArrayList<>();
+		values.forEach((key, value) -> {
+			if (value != null) {
+				ValorTag tag = new ValorTag();
+				TagCorreo tagCorreo = new TagCorreo();
+				tagCorreo.setClave(key);
+				tag.setTag(tagCorreo);
+				tag.setValor(value.toString());
+				tags.add(tag);
+			}
+		});
 
-            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-                return "BanBif - Disposición de Efectivo";
-            default:
-                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
-        }
-    }
+		return tags;
+	}
 
-    private String getTitle(TiposCorreos template) {
-        switch (template) {
-            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-                return "Ahorro Vuelto - Programación Eliminado con Éxito";
-            case AHORRO_VUELTO_EDICION_DE_AHORRO:
-                return "Ahorro Vuelto - Programación Cambiado con Éxito";
-            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-                return "Ahorro Vuelto - Registrado con Éxito";
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-                return "Ahorro Programado - Ejecución Efectuada con Êxito";
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-                return "Ahorro Programado - Ejecución no Pudo ser Completada";
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-                return "Ahorro Programado – Programación Exitosa";
-            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
-                return "Ahorro Programado - Transferencia Parcialmente Realizada";
-            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-                return "Ahorro Programado - Programación Cambiado con Éxito";
-            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-                return "Ahorro Programado - Programación Eliminado con Éxito";
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-                return "Ahorro Programado - Desactivado";
-            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-                return "";
-            default:
-                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
-        }
-    }
-
-    private String getSubtitle(TiposCorreos template) {
-        switch (template) {
-            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-            case AHORRO_VUELTO_EDICION_DE_AHORRO:
-            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
-                return "Información de la Programación";
-
-            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-                return "";
-
-            default:
-                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
-        }
-    }
-
-    private String getTitleDetails(TiposCorreos template) {
-        switch (template) {
-            case AHORRO_VUELTO_SUPRESSION_DE_AHORRO:
-            case AHORRO_VUELTO_EDICION_DE_AHORRO:
-            case AHORRO_VUELTO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO:
-            case AHORRO_PROGRAMADO_AHORRO_PROGRAMADO:
-            case AHORRO_PROGRAMADO_EDICION_DE_AHORRO:
-            case AHORRO_PROGRAMADO_SUPRESSION_DE_AHORRO:
-            case DISPOSICION_EFECTIVO_OPERACION_COMPLETADA:
-            case DISPOSICION_EFECTIVO_OPERACION_NO_COMPLETADA:
-            case AHORRO_PROGRAMADO_OPERACION_COMPLETUD_PARCIAL:
-                return "";
-            case AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA:
-                return "No se pudo realizar el abono a la cuenta solicitada. Te recomendamos revisar si la cuenta de retiro tiene fondos. También puede llmarmos a nuestra Banca Telefónica: Lima (01) 631-9000 Provincias 0-801-0-0456";
-            case AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO:
-                return "Tu servicio de ahorro ha sido desactivado. Puedo comunicarse con nuestra Banca Telefónica: Lima (01) 631-9000 Provincias: 0-801-0-0456";
-            default:
-                throw new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE);
-        }
-    }
 }
