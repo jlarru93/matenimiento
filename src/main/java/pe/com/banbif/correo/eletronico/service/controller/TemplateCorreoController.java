@@ -42,7 +42,7 @@ public class TemplateCorreoController {
 		return ResponseEntity.ok(templateCorreoService.update(headers, TemplateCorreo));
 	}
 	
-	@GetMapping("/templatesCorreo/{id}")
+	@GetMapping("/templatesCorreos/{id}")
 	public ResponseEntity<GetTemplateCorreoResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
 		return ResponseEntity.ok(templateCorreoService.findById(headers, id));
 	}
@@ -52,12 +52,12 @@ public class TemplateCorreoController {
 		return ResponseEntity.ok(templateCorreoService.list(headers));
 	}
 	
-	@DeleteMapping("/templatesCorreo/{id}")
+	@DeleteMapping("/templatesCorreos/{id}")
 	public ResponseEntity<RespuestaServicio> delete(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
 		return ResponseEntity.ok(templateCorreoService.delete(headers, id));
 	}
 	
-	@GetMapping("/templatesCorreo/{tipoCorreo}/tagsCorreo")
+	@GetMapping("/tiposCorreos/{tipoCorreo}/tagsCorreos")
 	public ResponseEntity<GetTagsCorreosResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("tipoCorreo") TiposCorreos tiposCorreos) {
 		return ResponseEntity.ok(tagCorreoService.list(headers, tiposCorreos));
 	}
