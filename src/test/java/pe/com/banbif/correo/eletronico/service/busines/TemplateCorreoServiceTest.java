@@ -23,6 +23,7 @@ import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.builder.CommonsTest;
 import pe.com.banbif.correo.eletronico.service.business.TemplateCorreoService;
+import pe.com.banbif.correo.eletronico.service.business.ValidateService;
 import pe.com.banbif.correo.eletronico.service.data.repository.TemplateCorreoRepository;
 import pe.com.banbif.correo.eletronico.service.exception.AlreadyExistsException;
 import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
@@ -34,10 +35,13 @@ public class TemplateCorreoServiceTest extends CommonsTest{
 	@Mock
 	private TemplateCorreoRepository templateCorreoRepository;
 	
+	@Mock
+	private ValidateService validateService;
+	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		templateCorreoService = new TemplateCorreoService(templateCorreoRepository);
+		templateCorreoService = new TemplateCorreoService(templateCorreoRepository, validateService);
 	}
 
 	@Test
