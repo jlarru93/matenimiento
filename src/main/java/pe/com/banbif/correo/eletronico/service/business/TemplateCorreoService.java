@@ -27,9 +27,11 @@ import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
 public class TemplateCorreoService {
 
 	private TemplateCorreoRepository templateCorreoRepository;
+	private ValidateService validadeService;
 
-	public TemplateCorreoService(TemplateCorreoRepository templateCorreoRepository) {
+	public TemplateCorreoService(TemplateCorreoRepository templateCorreoRepository, ValidateService validadeService) {
 		this.templateCorreoRepository = templateCorreoRepository;
+		this.validadeService = validadeService;
 	}
 
 	public TemplateCorreo save(TemplateCorreo templateCorreo) {
@@ -42,8 +44,9 @@ public class TemplateCorreoService {
 		return templateCorreoRepository.save(templateCorreo);
 	}
 	
-	public PostTemplateCorreoResponse save(Map<String, String> headers, TemplateCorreo TemplateCorreo) {
-		TemplateCorreo save = save(TemplateCorreo);
+	public PostTemplateCorreoResponse save(Map<String, String> headers, TemplateCorreo templateCorreo) {
+		validadeService.validateTemplateCorreo(templateCorreo);
+		TemplateCorreo save = save(templateCorreo);
 		return PostTemplateCorreoResponseBuilder.getInstace().build(headers, save);
 	}
 
@@ -68,8 +71,9 @@ public class TemplateCorreoService {
 		return templateCorreoRepository.save(templateCorreo);
 	}
 
-	public PutTemplateCorreoResponse update(Map<String, String> headers, TemplateCorreo TemplateCorreo) {
-		TemplateCorreo update = update(TemplateCorreo);
+	public PutTemplateCorreoResponse update(Map<String, String> headers, TemplateCorreo templateCorreo) {
+		validadeService.validateTemplateCorreo(templateCorreo);
+		TemplateCorreo update = update(templateCorreo);
 		return PutTemplateCorreoResponseBuilder.getInstace().build(headers, update);
 	}
 	

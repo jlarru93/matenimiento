@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import io.swagger.model.MensajeServicio;
 import io.swagger.model.MetadatoServicio;
 import pe.com.banbif.correo.eletronico.service.exception.AlreadyExistsException;
+import pe.com.banbif.correo.eletronico.service.exception.BanbifRuntimeException;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidAuthorizationException;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidCodigoCanalException;
 import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
@@ -21,7 +22,8 @@ public class EmailServiceExceptionHandler {
 
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<MetadatoServicio> runtimeHandler(RuntimeException ex) {
-		return new ResponseEntity<>(handle(ex), HttpStatus.INTERNAL_SERVER_ERROR);
+		HttpStatus status = ex instanceof BanbifRuntimeException? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR;
+		return new ResponseEntity<>(handle(ex), status);
 	}
 	
 	@ExceptionHandler(InvalidAuthorizationException.class)
