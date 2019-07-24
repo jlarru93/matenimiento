@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,31 +34,32 @@ public class TemplateCorreoController {
 		this.tagCorreoService = tagCorreoService;
 	}
 	
-	@PostMapping("/templatesCorreos")
+	@PostMapping("/api-correo-electronico/v1/templatesCorreos")
 	public ResponseEntity<PostTemplateCorreoResponse> post(@RequestHeader Map<String, String> headers, @RequestBody TemplateCorreo TemplateCorreo) {
 		return ResponseEntity.ok(templateCorreoService.save(headers, TemplateCorreo));
 	}
 	
+	@PutMapping("/api-correo-electronico/v1/templatesCorreos")
 	public ResponseEntity<PutTemplateCorreoResponse> put(@RequestHeader Map<String, String> headers, @RequestBody TemplateCorreo TemplateCorreo) {
 		return ResponseEntity.ok(templateCorreoService.update(headers, TemplateCorreo));
 	}
 	
-	@GetMapping("/templatesCorreos/{id}")
+	@GetMapping("/api-correo-electronico/v1/templatesCorreos/{id}")
 	public ResponseEntity<GetTemplateCorreoResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
 		return ResponseEntity.ok(templateCorreoService.findById(headers, id));
 	}
 	
-	@GetMapping("/templatesCorreos")
+	@GetMapping("/api-correo-electronico/v1/templatesCorreos")
 	public ResponseEntity<GetTemplatesCorreosResponse> get(@RequestHeader Map<String, String> headers) {
 		return ResponseEntity.ok(templateCorreoService.list(headers));
 	}
 	
-	@DeleteMapping("/templatesCorreos/{id}")
+	@DeleteMapping("/api-correo-electronico/v1/templatesCorreos/{id}")
 	public ResponseEntity<RespuestaServicio> delete(@RequestHeader Map<String, String> headers, @PathVariable("id") String id) {
 		return ResponseEntity.ok(templateCorreoService.delete(headers, id));
 	}
 	
-	@GetMapping("/tiposCorreos/{tipoCorreo}/tagsCorreos")
+	@GetMapping("/api-correo-electronico/v1/tiposCorreos/{tipoCorreo}/tagsCorreos")
 	public ResponseEntity<GetTagsCorreosResponse> get(@RequestHeader Map<String, String> headers, @PathVariable("tipoCorreo") TiposCorreos tiposCorreos) {
 		return ResponseEntity.ok(tagCorreoService.list(headers, tiposCorreos));
 	}
