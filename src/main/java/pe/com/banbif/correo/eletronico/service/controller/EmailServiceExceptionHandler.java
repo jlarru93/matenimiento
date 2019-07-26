@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import io.swagger.model.MensajeServicio;
 import io.swagger.model.MetadatoServicio;
+import io.swagger.model.RespuestaServicio;
 import pe.com.banbif.correo.eletronico.service.exception.AlreadyExistsException;
 import pe.com.banbif.correo.eletronico.service.exception.BanbifRuntimeException;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidAuthorizationException;
@@ -21,35 +22,37 @@ import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
 public class EmailServiceExceptionHandler {
 
 	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<MetadatoServicio> runtimeHandler(RuntimeException ex) {
+	public ResponseEntity<RespuestaServicio> runtimeHandler(RuntimeException ex) {
 		HttpStatus status = ex instanceof BanbifRuntimeException? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR;
 		return new ResponseEntity<>(handle(ex), status);
 	}
 	
 	@ExceptionHandler(InvalidAuthorizationException.class)
-	public ResponseEntity<MetadatoServicio> InvalidAuthorizationHandler(RuntimeException ex) {
+	public ResponseEntity<RespuestaServicio> InvalidAuthorizationHandler(RuntimeException ex) {
 		return new ResponseEntity<>(handle(ex), HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(InvalidCodigoCanalException.class)
-	public ResponseEntity<MetadatoServicio> InvalidCodigoCanalHandler(RuntimeException ex) {
+	public ResponseEntity<RespuestaServicio> InvalidCodigoCanalHandler(RuntimeException ex) {
 		return new ResponseEntity<>(handle(ex), HttpStatus.BAD_REQUEST);
 	}
 	
 	
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<MetadatoServicio> notFoundExceptionHandler(NotFoundException ex) {
+    public ResponseEntity<RespuestaServicio> notFoundExceptionHandler(NotFoundException ex) {
         return new ResponseEntity<>(handle(ex), HttpStatus.NOT_FOUND);
     }
     
     @ExceptionHandler(AlreadyExistsException.class)
-    public ResponseEntity<MetadatoServicio> notFoundExceptionHandler(AlreadyExistsException ex) {
+    public ResponseEntity<RespuestaServicio> notFoundExceptionHandler(AlreadyExistsException ex) {
         return new ResponseEntity<>(handle(ex), HttpStatus.CONFLICT);
     }
     
-	protected MetadatoServicio handle(Exception exception) {
+	protected RespuestaServicio handle(Exception exception) {
+		RespuestaServicio r = new RespuestaServicio();
 		String idTransaction = UUID.randomUUID().toString();
-		return buildMeta(exception, idTransaction);
+		r.setMeta(buildMeta(exception, idTransaction));
+		return r;
 
 	}
 	
