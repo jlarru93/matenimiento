@@ -29,8 +29,9 @@ public class ValidateService {
 
 	private void destinatarioValidade(Destinatario destinatario) {
 		if (destinatario == null || StringUtils.isBlank(destinatario.getEnderecoCorreo())) {
-			throw new RequiredException("remetente");
+			throw new RequiredException("destinatario");
 		}
+		
 		validateEmail(destinatario.getEnderecoCorreo());
 	}
 
@@ -59,7 +60,10 @@ public class ValidateService {
 	private void remetenteValidate(Remetente remetente) {
 		if (remetente == null || StringUtils.isBlank(remetente.getEnderecoCorreo())) {
 			throw new RequiredException("remetente");
+		} else if (remetente.getEnderecoCorreo().indexOf(";") > -1) {
+			throw new InvalidMailException(remetente.getEnderecoCorreo());
 		}
+		
 		validateEmail(remetente.getEnderecoCorreo());
 	}
 
