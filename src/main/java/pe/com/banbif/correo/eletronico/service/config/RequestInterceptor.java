@@ -18,7 +18,19 @@ public class RequestInterceptor implements HandlerInterceptor {
 
 		String canal = request.getHeader("codigoCanal");
 		String autorization = request.getHeader("Authorization");
-
+		String numeroPagina = request.getHeader("numeroPagina");
+		String cantidadRegistros = request.getHeader("cantidadRegistros");
+		
+		if (request.getMethod().equals("GET")) {
+			if (numeroPagina == null || !numeroPagina.matches("[-+]?\\d*\\.?\\d+")) {
+				throw new RuntimeException("¡Encabezado numeroPagina inválido!");
+			}
+			
+			if (cantidadRegistros == null || !cantidadRegistros.matches("[-+]?\\d*\\.?\\d+")) {
+				throw new RuntimeException("¡Encabezado cantidadRegistros inválido!");
+			}
+		}
+		
 		if (StringUtils.isBlank(autorization)) {
 			throw new InvalidAuthorizationException();
 		}
