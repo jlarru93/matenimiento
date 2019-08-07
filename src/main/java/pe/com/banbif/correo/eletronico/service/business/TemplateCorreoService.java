@@ -1,7 +1,7 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -23,9 +23,16 @@ import pe.com.banbif.correo.eletronico.service.data.repository.TemplateCorreoRep
 import pe.com.banbif.correo.eletronico.service.exception.AlreadyExistsException;
 import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+
 @Service
 public class TemplateCorreoService {
-
+	
+	private static final String CANTIDAD_REGISTROS_HEADER_NAME = "cantidadregistros";
+	private static final String NUMERO_PAGINA_HEADER_NAME = "numeropagina";
+	private static final int DEFAULT_PAGE_SIZE = 100;
 	private TemplateCorreoRepository templateCorreoRepository;
 	private ValidateService validadeService;
 
@@ -99,12 +106,21 @@ public class TemplateCorreoService {
 	
 	
 	public GetTemplatesCorreosResponse list(Map<String, String> headers) {
-		List<TemplateCorreo> list = list();
-		return GetTemplatesCorreosResponseBuilder.getInstace().build(headers, list);
-	}
-	
-	public List<TemplateCorreo> list(){
-		return templateCorreoRepository.findAll();
+		Pageable pageable;
+		int numeroPagina = 0;
+		
+		if (Objects.nonNull(headers.get(NUMERO_PAGINA_HEADER_NAME)) && String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
+			numeroPagina = Integer.parseInt(String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME))); 
+		}
+		        
+		if (Objects.nonNull(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)) && String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
+            pageable = PageRequest.of(numeroPagina, Integer.parseInt(String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME))));
+        } else {
+            pageable = PageRequest.of(numeroPagina, DEFAULT_PAGE_SIZE);
+        }
+        Page<TemplateCorreo> list = templateCorreoRepository.findAll(pageable);
+        
+		return GetTemplatesCorreosResponseBuilder.getInstace().build(headers, list, numeroPagina);
 	}
 
 	public TemplateCorreo delete(String id) {

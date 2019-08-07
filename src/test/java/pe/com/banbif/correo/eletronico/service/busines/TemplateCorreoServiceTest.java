@@ -13,6 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import io.swagger.model.GetTemplateCorreoResponse;
 import io.swagger.model.GetTemplatesCorreosResponse;
@@ -205,8 +208,10 @@ public class TemplateCorreoServiceTest extends CommonsTest{
 	
 	@Test
 	public void listSucessTest() {
-		when(templateCorreoRepository.findAll()).thenReturn(Arrays.asList(getTemplateCorreo(), getTemplateCorreo()));
-		GetTemplatesCorreosResponse response = templateCorreoService.list(getHeaders());
+		Pageable pageable = PageRequest.of(0, 2);
+
+		when(templateCorreoRepository.findAll(pageable)).thenReturn(new PageImpl<TemplateCorreo>(Arrays.asList(getTemplateCorreo(), getTemplateCorreo())));
+		GetTemplatesCorreosResponse response = templateCorreoService.list(getHeadersList());
 		
 		assertTrue(response.getMeta().getTotalRegistros() == 2);
 	}
