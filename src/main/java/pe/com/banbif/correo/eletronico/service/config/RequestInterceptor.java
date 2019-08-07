@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import pe.com.banbif.correo.eletronico.service.exception.BanbifRuntimeException;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidAuthorizationException;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidCodigoCanalException;
 
@@ -23,11 +24,11 @@ public class RequestInterceptor implements HandlerInterceptor {
 		
 		if (request.getMethod().equals("GET")) {
 			if (numeroPagina == null || !numeroPagina.matches("[-+]?\\d*\\.?\\d+")) {
-				throw new RuntimeException("¡Encabezado numeroPagina inválido!");
+				throw new BanbifRuntimeException("¡Encabezado numeroPagina inválido!");
 			}
 			
 			if (cantidadRegistros == null || !cantidadRegistros.matches("[-+]?\\d*\\.?\\d+")) {
-				throw new RuntimeException("¡Encabezado cantidadRegistros inválido!");
+				throw new BanbifRuntimeException("¡Encabezado cantidadRegistros inválido!");
 			}
 		}
 		
