@@ -17,6 +17,9 @@
     <file path="tagCorreo_ahorro_programado_eliminado.js"/>
     <file path="templateCorreo_ahorro_programado_eliminado.js"/>
     
+        <file path="tagCorreo_ahorro_programado_desactivado.js"/>
+    <file path="templateCorreo_ahorro_programado_desactivado.js"/>
+    
     <file path="tagCorreo_ahorro_vuelto_programado.js"/>
     <file path="templateCorreo_ahorro_vuelto_programado.js"/>
     
