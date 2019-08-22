@@ -11,7 +11,7 @@ db.tagCorreo.insert({
 
 db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_EDICION_DE_AHORRO",
-"clave":"CUENTA_ORIGIN"});
+"clave":"CUENTA_ORIGEN"});
 
 db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_EDICION_DE_AHORRO",
