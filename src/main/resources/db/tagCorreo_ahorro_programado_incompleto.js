@@ -11,7 +11,7 @@ db.tagCorreo.insert({
 
 db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
-"clave":"CUENTA_ORIGIN"});
+"clave":"CUENTA_ORIGEN"});
 
 db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_OPERACION_NO_PUDO_SER_COMPLETADA",
