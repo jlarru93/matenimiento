@@ -22,7 +22,11 @@ db.tagCorreo.insert({
 "clave":"NOMBRE_CLIENTE"});
 
 db.tagCorreo.insert({
+	"tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
+	"clave":"FECHA_FIN"});
+
+db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_SERVICIO_DE_AHORRO_DESACTIVADO",
-"clave":"FECHA_FIN"});
+"clave":"FRECUENCIA_AHORRO"});
 
 		
