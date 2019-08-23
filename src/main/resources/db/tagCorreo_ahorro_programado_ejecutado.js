@@ -34,7 +34,11 @@ db.tagCorreo.insert({
 	"clave":"COD_OPER_VALUE"});
 
 db.tagCorreo.insert({
+	"tipoCorreo": "AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO",
+	"clave":"FRECUENCIA_AHORRO"});
+
+db.tagCorreo.insert({
 "tipoCorreo": "AHORRO_PROGRAMADO_AHORRO_PROGRAMADO_EJECUTADO",
-"clave":"FRECUENCIA_AHORRO"});
+"clave":"SALDO_DISPONIBLE"});
 
 		
