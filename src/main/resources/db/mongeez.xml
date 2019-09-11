@@ -17,7 +17,7 @@
     <file path="tagCorreo_ahorro_programado_eliminado.js"/>
     <file path="templateCorreo_ahorro_programado_eliminado.js"/>
     
-        <file path="tagCorreo_ahorro_programado_desactivado.js"/>
+    <file path="tagCorreo_ahorro_programado_desactivado.js"/>
     <file path="templateCorreo_ahorro_programado_desactivado.js"/>
     
     <file path="tagCorreo_ahorro_vuelto_programado.js"/>
@@ -43,5 +43,8 @@
         
     <file path="tagCorreo_login_ambos.js"/>
     <file path="templateCorreo_login_ambos.js"/>
-    
+
+    <file path="tagCorreo_seguridad_empresas_softtoken.js"/>
+    <file path="templateCorreo_seguridad_empresas_softtoken.js"/>
+
 </changeFiles>
