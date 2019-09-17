@@ -157,6 +157,8 @@ public class EmailService {
                 .id(email.getId())
                 .valoresTags(templateService.fromMap(email.getTemplateVariables()));
 
+        LOGGER.info("Done");
+
         return correo;
 
     }
