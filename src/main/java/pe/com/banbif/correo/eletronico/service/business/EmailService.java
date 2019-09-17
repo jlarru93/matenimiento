@@ -102,34 +102,22 @@ public class EmailService {
             throw new RuntimeException(INVALID_EMAIL_ERROR_MESSAGE);
         }
 
-        LOGGER.info("Email Valido");
-        
         Optional<TemplateCorreo> templateCorreo = templateService.getTemplate(correo);
 
-        LOGGER.info("templateCorreo Pego");
-
         String contenido = templateService.getContent(correo, templateCorreo.get());
-
-        LOGGER.info("contenido Pego");
 
         if (StringUtils.isEmpty(contenido)) {
             throw new RuntimeException(TEMPLATE_GENERATION_ERROR);
         }
 
-        LOGGER.info("contenido nao branco");
-        
         if(templateCorreo.get().isEnvioCorreoCliente()) {
         	String enderecoCorreo = templateCorreo.get().getDestinatario().getEnderecoCorreo();
         	enderecoCorreo = concatEmailCliente(correo, enderecoCorreo);
         	templateCorreo.get().getDestinatario().setEnderecoCorreo(enderecoCorreo);
         }
 
-        LOGGER.info("envio cliente");
-        
         correo.setTemplateCorreo(templateCorreo.get());
         correo.getTemplateCorreo().setContenido(contenido);
-
-        LOGGER.info("envio cliente");
 
         return fromEmail(this.repository.save(toEmail(correo)));
     }
