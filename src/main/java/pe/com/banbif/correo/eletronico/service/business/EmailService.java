@@ -8,6 +8,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +26,8 @@ import pe.com.banbif.correo.eletronico.service.data.repository.EmailRepository;
 
 @Service
 public class EmailService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
 
     private final static String INVALID_EMAIL_ERROR_MESSAGE = "Invalid email information, it must have to address, " +
             "template identification and template variables";
@@ -97,25 +101,36 @@ public class EmailService {
         if (!isValid(correo)) {
             throw new RuntimeException(INVALID_EMAIL_ERROR_MESSAGE);
         }
+
+        LOGGER.info("Email Valido");
         
         Optional<TemplateCorreo> templateCorreo = templateService.getTemplate(correo);
 
+        LOGGER.info("templateCorreo Pego");
+
         String contenido = templateService.getContent(correo, templateCorreo.get());
+
+        LOGGER.info("contenido Pego");
 
         if (StringUtils.isEmpty(contenido)) {
             throw new RuntimeException(TEMPLATE_GENERATION_ERROR);
         }
+
+        LOGGER.info("contenido nao branco");
         
         if(templateCorreo.get().isEnvioCorreoCliente()) {
         	String enderecoCorreo = templateCorreo.get().getDestinatario().getEnderecoCorreo();
         	enderecoCorreo = concatEmailCliente(correo, enderecoCorreo);
         	templateCorreo.get().getDestinatario().setEnderecoCorreo(enderecoCorreo);
         }
+
+        LOGGER.info("envio cliente");
         
         correo.setTemplateCorreo(templateCorreo.get());
         correo.getTemplateCorreo().setContenido(contenido);
-        
-        
+
+        LOGGER.info("envio cliente");
+
         return fromEmail(this.repository.save(toEmail(correo)));
     }
 
