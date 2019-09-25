@@ -1,50 +1,53 @@
 <changeFiles>
     <file path="tagCorreo_ahorro_programado_programado.js"/>
     <file path="templateCorreo_ahorro_programado_programado.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_parcial.js"/>
     <file path="templateCorreo_ahorro_programado_parcial.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_ejecutado.js"/>
     <file path="templateCorreo_ahorro_programado_ejecutado.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_incompleto.js"/>
     <file path="templateCorreo_ahorro_programado_incompleto.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_cambiado.js"/>
     <file path="templateCorreo_ahorro_programado_cambiado.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_eliminado.js"/>
     <file path="templateCorreo_ahorro_programado_eliminado.js"/>
-    
+
     <file path="tagCorreo_ahorro_programado_desactivado.js"/>
     <file path="templateCorreo_ahorro_programado_desactivado.js"/>
-    
+
     <file path="tagCorreo_ahorro_vuelto_programado.js"/>
     <file path="templateCorreo_ahorro_vuelto_programado.js"/>
-    
+
     <file path="tagCorreo_ahorro_vuelto_cambiado.js"/>
     <file path="templateCorreo_ahorro_vuelto_cambiado.js"/>
-    
+
     <file path="tagCorreo_ahorro_vuelto_eliminado.js"/>
     <file path="templateCorreo_ahorro_vuelto_eliminado.js"/>
-    
+
     <file path="tagCorreo_disposicion_efectivo_sucess.js"/>
     <file path="templateCorreo_disposicion_efectivo_sucess.js"/>
-    
+
     <file path="tagCorreo_disposicion_efectivo_error.js"/>
-    <file path="templateCorreo_disposicion_efectivo_error.js"/>  
-      
+    <file path="templateCorreo_disposicion_efectivo_error.js"/>
+
     <file path="tagCorreo_login_ips.js"/>
     <file path="templateCorreo_login_ips.js"/>
-    
+
     <file path="tagCorreo_login_canais.js"/>
     <file path="templateCorreo_login_canais.js"/>
-        
+
     <file path="tagCorreo_login_ambos.js"/>
     <file path="templateCorreo_login_ambos.js"/>
 
     <file path="tagCorreo_seguridad_empresas_softtoken.js"/>
     <file path="templateCorreo_seguridad_empresas_softtoken.js"/>
+
+    <file path="tagCorreo_seguridad_empresas_softtoken.js"/>
+    <file path="templateCorreo_seguridad_empresas_softtoken_banca_movil.js"/>
 
 </changeFiles>
