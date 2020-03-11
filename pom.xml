@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pe.com.banbif</groupId>
-	<artifactId>banbif-correo-service</artifactId>
+	<artifactId>banbif-correo-service</artifactId> 
 	<version>1.0</version>
 
 	<properties>
