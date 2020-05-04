@@ -78,7 +78,7 @@ public class EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("prueba_change2@banbif.com.pe");
+        helper.setFrom(email.getFrom());
         
         String[] split = email.getTo().split(";");
         helper.setTo(split[split.length-1]);
