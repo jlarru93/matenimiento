@@ -41,15 +41,5 @@ podTemplate(label: "maven",
             )
 
         }
-
-        if (env.BRANCH_NAME == "master") {
-            def lastTag = promoteImageProduction(namespace : "${namespace}")
-
-            deployFabric8(
-                ambiente : 'prd',
-                namespace : "${namespace}",
-                tag : "${lastTag}"
-            )
-        }
     }
 }
