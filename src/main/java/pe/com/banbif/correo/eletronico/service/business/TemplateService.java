@@ -20,19 +20,21 @@ import io.swagger.model.Correo;
 import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TagCorreo;
 import io.swagger.model.ValorTag;
+import pe.com.banbif.correo.eletronico.service.models.CorreoDto;
+import pe.com.banbif.correo.eletronico.service.models.TemplateCorreoDto;
 
 @Service
 public class TemplateService {
 
 	private static final String TEMPLATE_NOT_FOUND_ERROR_MESSAGE = "template invalido";
 	
-	private TemplateCorreoService templateCorreoService;
-
-	public TemplateService(TemplateCorreoService templateCorreoService) {
-		this.templateCorreoService = templateCorreoService;
-	}
-
-	public String getContent(Correo email, TemplateCorreo template) {
+//	private TemplateCorreoService templateCorreoService;
+//
+//	public TemplateService(TemplateCorreoService templateCorreoService) {
+//		this.templateCorreoService = templateCorreoService;
+//	}
+//
+	public String getContent(CorreoDto email, TemplateCorreoDto template) {
 		try {
 
 			Map<String, Object> model = getModel(email);
@@ -51,15 +53,15 @@ public class TemplateService {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
-
-	public Optional<TemplateCorreo> getTemplate(Correo email) {
-		Optional<TemplateCorreo> TemplateCorreo = templateCorreoService
-				.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo(), email.getTemplateCorreo().getCanal());
-		TemplateCorreo.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
-		return TemplateCorreo;
-	}
-
-	private Map<String, Object> getModel(Correo email) {
+//
+//	public Optional<TemplateCorreoDto> getTemplate(CorreoDto email) {
+//		Optional<TemplateCorreoDto> TemplateCorreo = templateCorreoService
+//				.findByUniqueKey(email.getTemplateCorreo().getTipoCorreo(), email.getTemplateCorreo().getCanal());
+//		TemplateCorreo.orElseThrow(() -> new RuntimeException(TEMPLATE_NOT_FOUND_ERROR_MESSAGE));
+//		return TemplateCorreo;
+//	}
+//
+	private Map<String, Object> getModel(CorreoDto email) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		for (ValorTag tag : email.getValoresTags()) {

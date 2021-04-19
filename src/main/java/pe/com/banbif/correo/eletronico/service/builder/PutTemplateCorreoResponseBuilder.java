@@ -4,6 +4,8 @@ import java.util.Map;
 
 import io.swagger.model.TemplateCorreo;
 import io.swagger.model.PutTemplateCorreoResponse;
+import pe.com.banbif.correo.eletronico.service.models.PutTemplateCorreoDtoResponse;
+import pe.com.banbif.correo.eletronico.service.models.TemplateCorreoDto;
 
 public class PutTemplateCorreoResponseBuilder {
 	
@@ -11,8 +13,8 @@ public class PutTemplateCorreoResponseBuilder {
 		return new PutTemplateCorreoResponseBuilder();
 	}
 	
-	public PutTemplateCorreoResponse build(Map<String, String> headers, TemplateCorreo TemplateCorreo) {
-		PutTemplateCorreoResponse response = new PutTemplateCorreoResponse();
+	public PutTemplateCorreoDtoResponse build(Map<String, String> headers, TemplateCorreoDto TemplateCorreo) {
+		PutTemplateCorreoDtoResponse response = new PutTemplateCorreoDtoResponse();
 		response.setDatos(TemplateCorreo);
 		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers));
 		return response;

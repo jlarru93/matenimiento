@@ -1,30 +1,29 @@
 package pe.com.banbif.correo.eletronico.service.data.entity;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
-
-import io.swagger.model.TiposCorreos;
+import pe.com.banbif.correo.eletronico.service.models.TiposCorreosDto;
 
 public class Email {
 
-    @Id
-    private String id;
+    private BigInteger id;
     private String from;
     private String to;
-    private List<String> bcc;
+    private String bcc;
     private String subject;
     private String TemplateCorreo;
-    private TiposCorreos template;
+    private TiposCorreosDto template;
     private Map<String, Object> templateVariables;
 
-    public String getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -44,11 +43,11 @@ public class Email {
         this.to = to;
     }
 
-    public List<String> getBcc() {
+    public String getBcc() {
         return bcc;
     }
 
-    public void setBcc(List<String> bcc) {
+    public void setBcc(String bcc) {
         this.bcc = bcc;
     }
 
@@ -68,11 +67,11 @@ public class Email {
         this.TemplateCorreo = TemplateCorreo;
     }
 
-    public TiposCorreos getTemplate() {
+    public TiposCorreosDto getTemplate() {
         return template;
     }
 
-    public void setTemplate(TiposCorreos template) {
+    public void setTemplate(TiposCorreosDto template) {
         this.template = template;
     }
 

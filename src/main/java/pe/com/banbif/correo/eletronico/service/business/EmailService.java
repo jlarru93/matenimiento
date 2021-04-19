@@ -1,8 +1,10 @@
 package pe.com.banbif.correo.eletronico.service.business;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import io.swagger.model.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -10,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,12 +20,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import io.swagger.model.Correo;
 import io.swagger.model.Destinatario;
 import io.swagger.model.Remetente;
-import io.swagger.model.TemplateCorreo;
 import pe.com.banbif.correo.eletronico.service.data.entity.Email;
+import pe.com.banbif.correo.eletronico.service.data.repository.EmailImplRepository;
 import pe.com.banbif.correo.eletronico.service.data.repository.EmailRepository;
+import pe.com.banbif.correo.eletronico.service.models.CorreoDto;
+import pe.com.banbif.correo.eletronico.service.models.TemplateCorreoDto;
 
 @Service
 public class EmailService {
@@ -33,45 +37,45 @@ public class EmailService {
             "template identification and template variables";
     private final static String TEMPLATE_GENERATION_ERROR = "Unexpected error on template generation.";
 
-    private final EmailRepository repository;
+    private final EmailImplRepository repository;
     private final TemplateService templateService;
     private final JavaMailSender javaMailSender;
-    private final SendLogService sendLogService;
-    private final ErrorLogService errorLogService;
+//    private final SendLogService sendLogService;
+//    private final ErrorLogService errorLogService;
 
+
+
+    @Autowired
     public EmailService(
-            final EmailRepository repository,
+            final EmailImplRepository repository,
             final TemplateService templateService,
-            final JavaMailSender javaMailSender,
-            final SendLogService sendLogService,
-            final ErrorLogService errorLogService
+            final JavaMailSender javaMailSender
+//            final SendLogService sendLogService,
+//            final ErrorLogService errorLogService
     ) {
         this.repository = repository;
         this.templateService = templateService;
         this.javaMailSender = javaMailSender;
-        this.sendLogService = sendLogService;
-        this.errorLogService = errorLogService;
+//        this.sendLogService = sendLogService;
+//        this.errorLogService = errorLogService;
     }
 
     @Scheduled(fixedDelay = 10000L)
     public void processList() {
         int page = 0;
         int count = 10;
-        Page<Email> emailsPages = null;
+        List<Email> emailsPages = null;
 
-        do {
-            emailsPages = this.repository.findAll(PageRequest.of(page, count));
-            this.repository.deleteAll(emailsPages.getContent());
-            emailsPages.forEach(email -> {
-                try {
-                    sendMail(email);
-                    sendLogService.log(email);
-                } catch (Exception ex) {
-                    errorLogService.log(ex, email);
-                }
-            });
-            page++;
-        } while (emailsPages.hasNext());
+        emailsPages = this.repository.obtenerCorreos();
+//            this.repository.deleteAll(emailsPages.getContent());
+        emailsPages.forEach(email -> {
+            try {
+                sendMail(email);
+//                    sendLogService.log(email);
+            } catch (Exception ex) {
+//                    errorLogService.log(ex, email);
+            }
+        });
     }
 
     private void sendMail(Email email) throws MessagingException {
@@ -89,40 +93,43 @@ public class EmailService {
         helper.setSubject(email.getSubject());
         helper.setText(email.getTemplateCorreo(), true);
 
-        if (Objects.nonNull(email.getBcc()) && !email.getBcc().isEmpty()) {
-            helper.setBcc(email.getBcc().toArray(new String[0]));
-        }
+//        if (Objects.nonNull(email.getBcc()) && !email.getBcc().isEmpty()) {
+//            helper.setBcc(email.getBcc().toArray(new String[0]));
+//        }
 
         javaMailSender.send(message);
     }
 
 
-    public Correo queueEmail(Correo correo) {
+    public CorreoDto queueEmail(CorreoDto correo) {
         if (!isValid(correo)) {
             throw new RuntimeException(INVALID_EMAIL_ERROR_MESSAGE);
         }
 
-        Optional<TemplateCorreo> templateCorreo = templateService.getTemplate(correo);
+        TemplateCorreoDto templateCorreo = repository.obtenerPlantilla(correo.getTemplateCorreo().getTipoCorreo().getValue());
 
-        String contenido = templateService.getContent(correo, templateCorreo.get());
+//        Optional<TemplateCorreoDto> templateCorreo = null;//templateService.getTemplate(correo);
+
+        String contenido = templateService.getContent(correo, templateCorreo);
 
         if (StringUtils.isEmpty(contenido)) {
             throw new RuntimeException(TEMPLATE_GENERATION_ERROR);
         }
 
-        if(templateCorreo.get().isEnvioCorreoCliente()) {
-        	String enderecoCorreo = templateCorreo.get().getDestinatario().getEnderecoCorreo();
-        	enderecoCorreo = concatEmailCliente(correo, enderecoCorreo);
-        	templateCorreo.get().getDestinatario().setEnderecoCorreo(enderecoCorreo);
-        }
+        String enderecoCorreo = templateCorreo.getDestinatario().getEnderecoCorreo();
+        enderecoCorreo = concatEmailCliente(correo, enderecoCorreo);
+        templateCorreo.getDestinatario().setEnderecoCorreo(enderecoCorreo);
 
-        correo.setTemplateCorreo(templateCorreo.get());
+        correo.setTemplateCorreo(templateCorreo);
         correo.getTemplateCorreo().setContenido(contenido);
 
-        return fromEmail(this.repository.save(toEmail(correo)));
+        Email emailGuardar = toEmail(correo);
+        repository.guardarCorreo(emailGuardar);
+
+        return correo;
     }
 
-	private String concatEmailCliente(Correo correo, String enderecoCorreo) {
+	private String concatEmailCliente(CorreoDto correo, String enderecoCorreo) {
 		if(!StringUtils.isBlank(enderecoCorreo)) {
 			enderecoCorreo+= ";";
 		}
@@ -130,28 +137,28 @@ public class EmailService {
 		return mails;
 	}
 
-    private Correo fromEmail(Email email) {
-        Correo correo = new Correo();
-        TemplateCorreo templateCorreo = new TemplateCorreo();
+//    private CorreoDto fromEmail(Email email) {
+//        CorreoDto correo = new CorreoDto();
+//        TemplateCorreoDto templateCorreo = new TemplateCorreoDto();
+//
+//        templateCorreo
+//                .contenido(email.getTemplateCorreo())
+//                .remetente(new Remetente().enderecoCorreo(email.getFrom()))
+//                .asunto(email.getSubject())
+//                .destinatario(new Destinatario().enderecoCorreo(email.getTo()))
+//                .tipoCorreo(email.getTemplate());
+//
+//        correo.templateCorreo(templateCorreo)
+//                .id(email.getId())
+//                .valoresTags(templateService.fromMap(email.getTemplateVariables()));
+//
+//        LOGGER.info("Done");
+//
+//        return correo;
+//
+//    }
 
-        templateCorreo
-                .contenido(email.getTemplateCorreo())
-                .remetente(new Remetente().enderecoCorreo(email.getFrom()))
-                .asunto(email.getSubject())
-                .tipoCorreo(email.getTemplate())
-                .destinatario(new Destinatario().enderecoCorreo(email.getTo()));
-
-        correo.templateCorreo(templateCorreo)
-                .id(email.getId())
-                .valoresTags(templateService.fromMap(email.getTemplateVariables()));
-
-        LOGGER.info("Done");
-
-        return correo;
-
-    }
-
-    private Email toEmail(Correo correo) {
+    private Email toEmail(CorreoDto correo) {
         Email email = new Email();
         email.setTemplateCorreo(correo.getTemplateCorreo().getContenido());
         email.setFrom(correo.getTemplateCorreo().getRemetente().getEnderecoCorreo());
@@ -163,7 +170,7 @@ public class EmailService {
         return email;
     }
 
-    private boolean isValid(Correo email) {
+    private boolean isValid(CorreoDto email) {
         if (Objects.isNull(email.getTemplateCorreo())) {
             return false;
         }
@@ -176,11 +183,13 @@ public class EmailService {
             return false;
         }
 
-        if(Objects.isNull(email.getTemplateCorreo().getTipoCorreo())) {
-            return false;
-        }
+//        if(Objects.isNull(email.getTemplateCorreo().getTipoCorreo())) {
+//            return false;
+//        }
+
+            return true;
 
 
-        return !Objects.isNull(email.getValoresTags()) && !email.getValoresTags().isEmpty();
+//        return !Objects.isNull(email.getValoresTags()) && !email.getValoresTags().isEmpty();
     }
 }

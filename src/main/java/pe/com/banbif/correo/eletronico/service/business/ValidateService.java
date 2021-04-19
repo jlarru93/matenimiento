@@ -10,13 +10,15 @@ import io.swagger.model.TemplateCorreo;
 import io.swagger.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.exception.InvalidMailException;
 import pe.com.banbif.correo.eletronico.service.exception.RequiredException;
+import pe.com.banbif.correo.eletronico.service.models.TemplateCorreoDto;
+import pe.com.banbif.correo.eletronico.service.models.TiposCorreosDto;
 
 @Service
 public class ValidateService {
 
 	private static final String REGEX_MAIL = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
-	public void validateTemplateCorreo(TemplateCorreo templateCorreo) {
+	public void validateTemplateCorreo(TemplateCorreoDto templateCorreo) {
 
 		canalValidate(templateCorreo.getCanal());
 		envioCorreoClienteValidate(templateCorreo.isEnvioCorreoCliente());
@@ -67,7 +69,7 @@ public class ValidateService {
 		validateEmail(remetente.getEnderecoCorreo());
 	}
 
-	private void tipoCorreoValidate(TiposCorreos tipoCorreo) {
+	private void tipoCorreoValidate(TiposCorreosDto tipoCorreo) {
 		if (tipoCorreo == null) {
 			throw new RequiredException("tipoCorreo");
 		}

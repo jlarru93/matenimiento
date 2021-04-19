@@ -13,7 +13,6 @@ import io.swagger.model.PostTemplateCorreoResponse;
 import io.swagger.model.PutTemplateCorreoResponse;
 import io.swagger.model.RespuestaServicio;
 import io.swagger.model.TemplateCorreo;
-import io.swagger.model.TiposCorreos;
 import pe.com.banbif.correo.eletronico.service.builder.GetTemplateCorreoResponseBuilder;
 import pe.com.banbif.correo.eletronico.service.builder.GetTemplatesCorreosResponseBuilder;
 import pe.com.banbif.correo.eletronico.service.builder.PostTemplateCorreoResponseBuilder;
@@ -26,114 +25,115 @@ import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
+import pe.com.banbif.correo.eletronico.service.models.*;
 
 @Service
 public class TemplateCorreoService {
 	
-	private static final String CANTIDAD_REGISTROS_HEADER_NAME = "cantidadregistros";
-	private static final String NUMERO_PAGINA_HEADER_NAME = "numeropagina";
-	private static final int DEFAULT_PAGE_SIZE = 100;
-	private TemplateCorreoRepository templateCorreoRepository;
-	private ValidateService validadeService;
+//	private static final String CANTIDAD_REGISTROS_HEADER_NAME = "cantidadregistros";
+//	private static final String NUMERO_PAGINA_HEADER_NAME = "numeropagina";
+//	private static final int DEFAULT_PAGE_SIZE = 100;
+//	private TemplateCorreoRepository templateCorreoRepository;
+//	private ValidateService validadeService;
+//
+//	public TemplateCorreoService(TemplateCorreoRepository templateCorreoRepository, ValidateService validadeService) {
+//		this.templateCorreoRepository = templateCorreoRepository;
+//		this.validadeService = validadeService;
+//	}
 
-	public TemplateCorreoService(TemplateCorreoRepository templateCorreoRepository, ValidateService validadeService) {
-		this.templateCorreoRepository = templateCorreoRepository;
-		this.validadeService = validadeService;
-	}
-
-	public TemplateCorreo save(TemplateCorreo templateCorreo) {
-		Optional<TemplateCorreo> findByTiposCorreos = findByUniqueKey(templateCorreo.getTipoCorreo(), templateCorreo.getCanal());
-		if (findByTiposCorreos.isPresent()) {
-			throw new AlreadyExistsException();
-		}
-		templateCorreo.setId(null);
-
-		return templateCorreoRepository.save(templateCorreo);
-	}
+//	public TemplateCorreoDto save(TemplateCorreoDto templateCorreo) {
+//		Optional<TemplateCorreoDto> findByTiposCorreos = findByUniqueKey(templateCorreo.getTipoCorreo(), templateCorreo.getCanal());
+//		if (findByTiposCorreos.isPresent()) {
+//			throw new AlreadyExistsException();
+//		}
+//		templateCorreo.setId(null);
+//
+//		return templateCorreoRepository.save(templateCorreo);
+//	}
 	
-	public PostTemplateCorreoResponse save(Map<String, String> headers, TemplateCorreo templateCorreo) {
-		validadeService.validateTemplateCorreo(templateCorreo);
-		TemplateCorreo save = save(templateCorreo);
-		return PostTemplateCorreoResponseBuilder.getInstace().build(headers, save);
-	}
+//	public PostTemplateCorreoDtoResponse save(Map<String, String> headers, TemplateCorreoDto templateCorreo) {
+//		validadeService.validateTemplateCorreo(templateCorreo);
+//		TemplateCorreoDto save = save(templateCorreo);
+//		return PostTemplateCorreoResponseBuilder.getInstace().build(headers, save);
+//	}
 
 
-	public Optional<TemplateCorreo> findByUniqueKey(TiposCorreos tiposCorreos, CodigosCanales codigosCanales) {
-		return templateCorreoRepository.findByTipoCorreoAndCanal(tiposCorreos, codigosCanales);
-	}
+//	public Optional<TemplateCorreoDto> findByUniqueKey(TiposCorreosDto tiposCorreos, CodigosCanales codigosCanales) {
+//		return templateCorreoRepository.findByTipoCorreoAndCanal(tiposCorreos, codigosCanales);
+//	}
 
-	public TemplateCorreo update(TemplateCorreo templateCorreo) {
-		TemplateCorreo findById = findById(templateCorreo.getId());
+//	public TemplateCorreoDto update(TemplateCorreoDto templateCorreo) {
+//		TemplateCorreoDto findById = findById(templateCorreo.getId());
+//
+//		Optional<TemplateCorreoDto> findByUniqueKey = findByUniqueKey(templateCorreo.getTipoCorreo(), templateCorreo.getCanal());
+//
+//		if (findByUniqueKey.isPresent()) {
+//			TemplateCorreoDto email = findByUniqueKey.get();
+//
+//			if (!email.getId().equalsIgnoreCase(findById.getId())) {
+//				throw new AlreadyExistsException();
+//			}
+//		}
+//
+//		return templateCorreoRepository.save(templateCorreo);
+//	}
 
-		Optional<TemplateCorreo> findByUniqueKey = findByUniqueKey(templateCorreo.getTipoCorreo(), templateCorreo.getCanal());
-
-		if (findByUniqueKey.isPresent()) {
-			TemplateCorreo email = findByUniqueKey.get();
-
-			if (!email.getId().equalsIgnoreCase(findById.getId())) {
-				throw new AlreadyExistsException();
-			}
-		}
-
-		return templateCorreoRepository.save(templateCorreo);
-	}
-
-	public PutTemplateCorreoResponse update(Map<String, String> headers, TemplateCorreo templateCorreo) {
-		validadeService.validateTemplateCorreo(templateCorreo);
-		TemplateCorreo update = update(templateCorreo);
-		return PutTemplateCorreoResponseBuilder.getInstace().build(headers, update);
-	}
+//	public PutTemplateCorreoDtoResponse update(Map<String, String> headers, TemplateCorreoDto templateCorreo) {
+//		validadeService.validateTemplateCorreo(templateCorreo);
+//		TemplateCorreoDto update = update(templateCorreo);
+//		return PutTemplateCorreoResponseBuilder.getInstace().build(headers, update);
+//	}
 	
-	public TemplateCorreo findById(String id) {
-		Optional<TemplateCorreo> findById = templateCorreoRepository.findById(id);
-		
-		return findById.orElseThrow(() -> new NotFoundException());
-	}
+//	public TemplateCorreoDto findById(String id) {
+//		Optional<TemplateCorreoDto> findById = templateCorreoRepository.findById(id);
+//
+//		return findById.orElseThrow(() -> new NotFoundException());
+//	}
 	
-	public GetTemplateCorreoResponse findById(Map<String, String> headers, String id) {
-		TemplateCorreo findById = findById(id);
-		
-		return GetTemplateCorreoResponseBuilder.getInstace().build(headers, findById);
-	}
+//	public GetTemplateCorreoDtoResponse findById(Map<String, String> headers, String id) {
+//		TemplateCorreoDto findById = findById(id);
+//
+//		return GetTemplateCorreoResponseBuilder.getInstace().build(headers, findById);
+//	}
 	
-	public GetTemplateCorreoResponse findByUniqueKey(Map<String, String> headers, TiposCorreos tiposCorreos) {
-		 String codigoCanal = headers.get("codigoCanal");
-		 CodigosCanales canales = CodigosCanales.valueOf(codigoCanal);
-		 Optional<TemplateCorreo> findByUniqueKey = findByUniqueKey(tiposCorreos, canales);
-		
-		return GetTemplateCorreoResponseBuilder.getInstace().build(headers, findByUniqueKey.orElseThrow(() -> new NotFoundException()));
-	}
+//	public GetTemplateCorreoDtoResponse findByUniqueKey(Map<String, String> headers, TiposCorreosDto tiposCorreos) {
+//		 String codigoCanal = headers.get("codigoCanal");
+//		 CodigosCanales canales = CodigosCanales.valueOf(codigoCanal);
+//		 Optional<TemplateCorreoDto> findByUniqueKey = findByUniqueKey(tiposCorreos, canales);
+//
+//		return GetTemplateCorreoResponseBuilder.getInstace().build(headers, findByUniqueKey.orElseThrow(() -> new NotFoundException()));
+//	}
 	
 	
-	public GetTemplatesCorreosResponse list(Map<String, String> headers) {
-		Pageable pageable;
-		int numeroPagina = 0;
-		
-		if (Objects.nonNull(headers.get(NUMERO_PAGINA_HEADER_NAME)) && String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
-			numeroPagina = Integer.parseInt(String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME))); 
-		}
-		        
-		if (Objects.nonNull(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)) && String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
-            pageable = PageRequest.of(numeroPagina, Integer.parseInt(String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME))));
-        } else {
-            pageable = PageRequest.of(numeroPagina, DEFAULT_PAGE_SIZE);
-        }
-        Page<TemplateCorreo> list = templateCorreoRepository.findAll(pageable);
-        
-		return GetTemplatesCorreosResponseBuilder.getInstace().build(headers, list, numeroPagina);
-	}
+//	public GetTemplatesCorreosDtoResponse list(Map<String, String> headers) {
+//		Pageable pageable;
+//		int numeroPagina = 0;
+//
+//		if (Objects.nonNull(headers.get(NUMERO_PAGINA_HEADER_NAME)) && String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
+//			numeroPagina = Integer.parseInt(String.valueOf(headers.get(NUMERO_PAGINA_HEADER_NAME)));
+//		}
+//
+//		if (Objects.nonNull(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)) && String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME)).matches("[-+]?\\d*\\.?\\d+")) {
+//            pageable = PageRequest.of(numeroPagina, Integer.parseInt(String.valueOf(headers.get(CANTIDAD_REGISTROS_HEADER_NAME))));
+//        } else {
+//            pageable = PageRequest.of(numeroPagina, DEFAULT_PAGE_SIZE);
+//        }
+//        Page<TemplateCorreoDto> list = templateCorreoRepository.findAll(pageable);
+//
+//		return GetTemplatesCorreosResponseBuilder.getInstace().build(headers, list, numeroPagina);
+//	}
 
-	public TemplateCorreo delete(String id) {
-		TemplateCorreo findById = findById(id);
-		templateCorreoRepository.delete(findById);
-		
-		return findById;
-	}
+//	public TemplateCorreoDto delete(String id) {
+//		TemplateCorreoDto findById = findById(id);
+//		templateCorreoRepository.delete(findById);
+//
+//		return findById;
+//	}
 	
-	public RespuestaServicio delete(Map<String, String> headers, String id) {
-		delete(id);
-		return RespuestaServicioBuilder.getInstace().build(headers);
-	}
+//	public RespuestaServicio delete(Map<String, String> headers, String id) {
+//		delete(id);
+//		return RespuestaServicioBuilder.getInstace().build(headers);
+//	}
 	
 
 

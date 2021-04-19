@@ -15,19 +15,19 @@ import pe.com.banbif.correo.eletronico.service.exception.NotFoundException;
 @Service
 public class TagCorreoService {
 
-	private TagCorreoRepository tagCorreoRepository;
-
-	public TagCorreoService(TagCorreoRepository tagCorreoRepository) {
-		this.tagCorreoRepository = tagCorreoRepository;
-	}
-	
-	public List<TagCorreo> listByUniqueKey(TiposCorreos tiposCorreos) {
-		return tagCorreoRepository.findByTipoCorreo(tiposCorreos).orElseThrow(() -> new NotFoundException());
-	}
-
-	public GetTagsCorreosResponse list(Map<String, String> headers, TiposCorreos tiposCorreos) {
-		List<TagCorreo> tags = listByUniqueKey(tiposCorreos);
-		return GetTagCorreoResponseBuilder.getInstace().build(headers, tags);
-	}
+//	private TagCorreoRepository tagCorreoRepository;
+//
+//	public TagCorreoService(TagCorreoRepository tagCorreoRepository) {
+//		this.tagCorreoRepository = tagCorreoRepository;
+//	}
+//
+//	public List<TagCorreo> listByUniqueKey(String tiposCorreos) {
+//		return tagCorreoRepository.findByTipoCorreo(tiposCorreos).orElseThrow(() -> new NotFoundException());
+//	}
+//
+//	public GetTagsCorreosResponse list(Map<String, String> headers, String tiposCorreos) {
+//		List<TagCorreo> tags = listByUniqueKey(tiposCorreos);
+//		return GetTagCorreoResponseBuilder.getInstace().build(headers, tags);
+//	}
 
 }

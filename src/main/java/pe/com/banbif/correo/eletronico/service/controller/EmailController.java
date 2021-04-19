@@ -4,10 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.swagger.model.Correo;
-import io.swagger.model.PostCorreoResponse;
 import pe.com.banbif.correo.eletronico.service.business.EmailService;
+import pe.com.banbif.correo.eletronico.service.models.CorreoDto;
+import pe.com.banbif.correo.eletronico.service.models.PostCorreoDtoResponse;
 
 @RestController("/correos")
 public class EmailController {
@@ -19,8 +18,8 @@ public class EmailController {
     }
 
     @PostMapping
-    public ResponseEntity<PostCorreoResponse> queueEmail(@RequestBody Correo email) {
-        PostCorreoResponse response = new PostCorreoResponse().datos(this.emailService.queueEmail(email));
+    public ResponseEntity<PostCorreoDtoResponse> queueEmail(@RequestBody CorreoDto email) {
+        PostCorreoDtoResponse response = new PostCorreoDtoResponse().datos(this.emailService.queueEmail(email));
         return ResponseEntity.ok(response);
     }
     

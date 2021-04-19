@@ -13,12 +13,12 @@ import pe.com.banbif.correo.eletronico.service.data.repository.ErrorLogRepositor
 @Service
 public class ErrorLogService {
 
-    private final ErrorLogRepository repository;
-
-    @Autowired
-    public ErrorLogService(final ErrorLogRepository repository) {
-        this.repository = repository;
-    }
+//    private final ErrorLogRepository repository;
+//
+//    @Autowired
+//    public ErrorLogService(final ErrorLogRepository repository) {
+//        this.repository = repository;
+//    }
 
     public void log(final Throwable ex, final Email email) {
         ErrorLog log = new ErrorLog();
@@ -26,14 +26,10 @@ public class ErrorLogService {
         log.setErrorMessage(ex.getMessage());
         log.setTime(LocalDateTime.now());
         log.setStackTrace(ExceptionUtils.getStackTrace(ex));
-        saveLog(log);
+//        saveLog(log);
     }
 
-    public ErrorLog saveLog(final ErrorLog log) {
-        return this.repository.save(log);
-    }
-
-    public ErrorLog findByEmailId(String emailId) {
-        return repository.findByEmail_Id(emailId);
-    }
+//    public ErrorLog saveLog(final ErrorLog log) {
+//        return this.repository.save(log);
+//    }
 }

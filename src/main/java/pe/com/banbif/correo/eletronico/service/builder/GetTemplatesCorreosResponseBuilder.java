@@ -3,9 +3,9 @@ package pe.com.banbif.correo.eletronico.service.builder;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
-
-import io.swagger.model.GetTemplatesCorreosResponse;
 import io.swagger.model.TemplateCorreo;
+import pe.com.banbif.correo.eletronico.service.models.GetTemplatesCorreosDtoResponse;
+import pe.com.banbif.correo.eletronico.service.models.TemplateCorreoDto;
 
 public class GetTemplatesCorreosResponseBuilder {
 	
@@ -13,8 +13,8 @@ public class GetTemplatesCorreosResponseBuilder {
 		return new GetTemplatesCorreosResponseBuilder();
 	}
 	
-	public GetTemplatesCorreosResponse build(Map<String, String> headers, Page<TemplateCorreo> contents, int numeroPagina) {
-		GetTemplatesCorreosResponse response = new GetTemplatesCorreosResponse();
+	public GetTemplatesCorreosDtoResponse build(Map<String, String> headers, Page<TemplateCorreoDto> contents, int numeroPagina) {
+		GetTemplatesCorreosDtoResponse response = new GetTemplatesCorreosDtoResponse();
 		response.setDatos(contents.getContent());
 		response.setMeta(MetadatoServicioBuilder.getInstace().buildMeta(headers, (int) contents.getTotalElements()));
 		response.getMeta().setNumeroTotalPaginas((int) contents.getTotalPages());
