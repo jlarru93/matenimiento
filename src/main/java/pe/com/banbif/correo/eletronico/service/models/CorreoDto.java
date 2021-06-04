@@ -20,6 +20,17 @@ public class CorreoDto {
     private Cliente cliente = null;
     @JsonProperty("valoresTags")
     private List<ValorTag> valoresTags = null;
+    @JsonProperty("documentos")
+    private List<String> documentos = null;
+
+
+    public List<String> getDocumentos() {
+        return documentos;
+    }
+
+    public void setDocumentos(List<String> documentos) {
+        this.documentos = documentos;
+    }
 
     public CorreoDto() {
     }
@@ -94,14 +105,14 @@ public class CorreoDto {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             CorreoDto correo = (CorreoDto)o;
-            return Objects.equals(this.id, correo.id) && Objects.equals(this.templateCorreo, correo.templateCorreo) && Objects.equals(this.cliente, correo.cliente) && Objects.equals(this.valoresTags, correo.valoresTags);
+            return Objects.equals(this.id, correo.id) && Objects.equals(this.templateCorreo, correo.templateCorreo) && Objects.equals(this.cliente, correo.cliente) && Objects.equals(this.valoresTags, correo.valoresTags)  && Objects.equals(this.documentos, correo.documentos);
         } else {
             return false;
         }
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.id, this.templateCorreo, this.cliente, this.valoresTags});
+        return Objects.hash(new Object[]{this.id, this.templateCorreo, this.cliente, this.valoresTags, this.documentos});
     }
 
     public String toString() {
@@ -111,6 +122,7 @@ public class CorreoDto {
         sb.append("    templateCorreo: ").append(this.toIndentedString(this.templateCorreo)).append("\n");
         sb.append("    cliente: ").append(this.toIndentedString(this.cliente)).append("\n");
         sb.append("    valoresTags: ").append(this.toIndentedString(this.valoresTags)).append("\n");
+        sb.append("    documentos: ").append(this.toIndentedString(this.documentos)).append("\n");
         sb.append("}");
         return sb.toString();
     }

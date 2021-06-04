@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>pe.com.banbif</groupId>
 			<artifactId>banbif-api-models</artifactId>
-			<version>3.65.1-SNAPSHOT</version> 
+			<version>3.87.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

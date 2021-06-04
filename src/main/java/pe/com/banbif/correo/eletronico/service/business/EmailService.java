@@ -107,7 +107,7 @@ public class EmailService {
         }
 
         TemplateCorreoDto templateCorreo = repository.obtenerPlantilla(correo.getTemplateCorreo().getTipoCorreo().getValue());
-
+//        TemplateCorreoDto templateCorreo =correo.getTemplateCorreo();
 //        Optional<TemplateCorreoDto> templateCorreo = null;//templateService.getTemplate(correo);
 
         String contenido = templateService.getContent(correo, templateCorreo);
