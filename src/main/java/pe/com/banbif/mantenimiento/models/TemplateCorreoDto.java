@@ -2,7 +2,10 @@ package pe.com.banbif.mantenimiento.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.*;
+import pe.com.banbif.mantenimiento.swagger.CodigosCanales;
+import pe.com.banbif.mantenimiento.swagger.Destinatario;
+import pe.com.banbif.mantenimiento.swagger.Remetente;
+
 
 import java.util.Objects;
 

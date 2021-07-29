@@ -12,14 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import io.swagger.model.MensajeServicio;
-import io.swagger.model.MetadatoServicio;
-import io.swagger.model.RespuestaServicio;
+
 import pe.com.banbif.mantenimiento.exception.AlreadyExistsException;
 import pe.com.banbif.mantenimiento.exception.BanbifRuntimeException;
 import pe.com.banbif.mantenimiento.exception.InvalidAuthorizationException;
 import pe.com.banbif.mantenimiento.exception.InvalidCodigoCanalException;
 import pe.com.banbif.mantenimiento.exception.NotFoundException;
+import pe.com.banbif.mantenimiento.swagger.MensajeServicio;
+import pe.com.banbif.mantenimiento.swagger.MetadatoServicio;
+import pe.com.banbif.mantenimiento.swagger.RespuestaServicio;
 
 @ControllerAdvice
 public class ServiceExceptionHandler {

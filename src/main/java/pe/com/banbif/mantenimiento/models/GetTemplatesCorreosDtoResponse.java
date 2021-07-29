@@ -2,7 +2,8 @@ package pe.com.banbif.mantenimiento.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.MetadatoServicio;
+
+import pe.com.banbif.mantenimiento.swagger.MetadatoServicio;
 
 import java.util.ArrayList;
 import java.util.List;
