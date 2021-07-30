@@ -10,6 +10,7 @@ import pe.com.banbif.mantenimiento.service.DbService;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/db")
@@ -18,9 +19,9 @@ public class DbController {
 
     private final DbService dbService;
 
-    @GetMapping("/listar")
-    public List<Db> listar() {
-        return dbService.listar();
+    @GetMapping({"/listar/{idDb}", "/listar"})
+    public List<Db> listar(@PathVariable Optional<Integer> idDb) {
+        return dbService.listar(idDb);
     }
 
     @PostMapping("/crear")

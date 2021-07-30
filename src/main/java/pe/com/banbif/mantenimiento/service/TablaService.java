@@ -3,8 +3,10 @@ package pe.com.banbif.mantenimiento.service;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Service;
+import pe.com.banbif.mantenimiento.data.entity.Db;
 import pe.com.banbif.mantenimiento.data.entity.Servidor;
 import pe.com.banbif.mantenimiento.data.entity.Tabla;
+import pe.com.banbif.mantenimiento.data.repository.DbRepository;
 import pe.com.banbif.mantenimiento.data.repository.ServidorRepository;
 import pe.com.banbif.mantenimiento.data.repository.TablaRepository;
 import pe.com.banbif.mantenimiento.exception.BanbifRuntimeException;
@@ -18,23 +20,32 @@ import java.util.Optional;
 public class TablaService {
 
     private final TablaRepository tablaRepository;
+
     private static final String RECORD_NOT_FOUND = "No se encontro ningun registro";
-    public List<Tabla> listarTabla() {
-        return  tablaRepository.findAll();
+
+    public List<Tabla> listarTabla(Optional<Integer> id) {
+        List<Tabla> resultTabla = null;
+        if (id.isPresent()) {
+            resultTabla = tablaRepository.getColumnByTable(id.get());
+        } else {
+            resultTabla = tablaRepository.findAll();
+        }
+        return resultTabla;
     }
 
     public Tabla crear(Tabla tabla) {
-        return  tablaRepository.save(tabla);
+        return tablaRepository.save(tabla);
     }
 
     public Tabla delete(Integer id) {
         Tabla tabla = tablaRepository.findById(id).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
-        tablaRepository.deleteById(tabla.getId_tabla());
+        tabla.setFlag_eliminar_fila("1");
+        tablaRepository.save(tabla);
         return tabla;
     }
 
     public Tabla actualizar(Tabla tabla) {
-        Tabla resultServidor= tablaRepository.findById(tabla.getId_tabla()).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
+        Tabla resultServidor = tablaRepository.findById(tabla.getId_tabla()).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
         resultServidor.setNombre_tabla(tabla.getNombre_tabla());
         resultServidor.setDescripcion(tabla.getDescripcion());
         resultServidor.setEstado(tabla.getEstado());

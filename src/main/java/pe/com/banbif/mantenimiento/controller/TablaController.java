@@ -2,12 +2,14 @@ package pe.com.banbif.mantenimiento.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pe.com.banbif.mantenimiento.data.entity.Db;
 import pe.com.banbif.mantenimiento.data.entity.Servidor;
 import pe.com.banbif.mantenimiento.data.entity.Tabla;
 import pe.com.banbif.mantenimiento.service.ServidorService;
 import pe.com.banbif.mantenimiento.service.TablaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/tabla")
@@ -16,9 +18,9 @@ public class TablaController {
 
     private final TablaService tablaService;
 
-    @GetMapping("/listar")
-    public List<Tabla> listar() {
-        return tablaService.listarTabla();
+    @GetMapping({"/listar/{id}", "/listar"})
+    public List<Tabla> listar(@PathVariable Optional<Integer> id) {
+        return tablaService.listarTabla(id);
     }
 
     @PostMapping("/crear")

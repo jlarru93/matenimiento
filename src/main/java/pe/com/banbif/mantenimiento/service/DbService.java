@@ -12,6 +12,7 @@ import pe.com.banbif.mantenimiento.data.repository.ServidorRepository;
 import pe.com.banbif.mantenimiento.exception.BanbifRuntimeException;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +21,16 @@ import java.util.Optional;
 public class DbService {
 
     private final DbRepository dbRepository;
-    private static final String RECORD_NOT_FOUND="No se encontro ningun registro";
+    private static final String RECORD_NOT_FOUND = "No se encontro ningun registro";
 
-    public List<Db> listar() {
-        return dbRepository.findAll();
+    public List<Db> listar(Optional<Integer> idDb) {
+        List<Db> resultDb = null;
+        if (idDb.isPresent()) {
+            resultDb = dbRepository.getTableByDb(idDb.get());
+        } else {
+            resultDb = dbRepository.findAll();
+        }
+        return resultDb;
     }
 
     public Db crear(Db db) {
@@ -37,7 +44,7 @@ public class DbService {
     }
 
     public Db actualizar(Db db) {
-        Db resultServidor= dbRepository.findById(db.getId_db()).orElseThrow(() -> new BanbifRuntimeException("RECORD_NOT_FOUND"));
+        Db resultServidor = dbRepository.findById(db.getId_db()).orElseThrow(() -> new BanbifRuntimeException("RECORD_NOT_FOUND"));
         resultServidor.setNombre_db(db.getNombre_db());
         resultServidor.setDescripcion(db.getDescripcion());
         resultServidor.setEstado(db.getEstado());

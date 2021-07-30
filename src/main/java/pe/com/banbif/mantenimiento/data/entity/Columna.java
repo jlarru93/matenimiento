@@ -1,19 +1,22 @@
 package pe.com.banbif.mantenimiento.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "man_columna")
-@Data
+@Setter
+@Getter
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Columna {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Integer id_columna;
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "id_tabla")
 	 private Integer id_tabla;
 	 private String nombre_campo;
 	 private String nombre_corto;
