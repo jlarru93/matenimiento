@@ -18,9 +18,14 @@ public class TablaController {
 
     private final TablaService tablaService;
 
-    @GetMapping({"/listar/{id}", "/listar"})
-    public List<Tabla> listar(@PathVariable Optional<Integer> id) {
-        return tablaService.listarTabla(id);
+    @GetMapping("/listar")
+    public List<Tabla> listar() {
+        return tablaService.listarTabla();
+    }
+
+    @GetMapping("/listar/{id}")
+    public Tabla listarColumnaByTable(@PathVariable Integer id) {
+        return tablaService.listarColumnaByTabla(id);
     }
 
     @PostMapping("/crear")

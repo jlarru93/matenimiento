@@ -23,14 +23,12 @@ public class TablaService {
 
     private static final String RECORD_NOT_FOUND = "No se encontro ningun registro";
 
-    public List<Tabla> listarTabla(Optional<Integer> id) {
-        List<Tabla> resultTabla = null;
-        if (id.isPresent()) {
-            resultTabla = tablaRepository.getColumnByTable(id.get());
-        } else {
-            resultTabla = tablaRepository.findAll();
-        }
-        return resultTabla;
+    public List<Tabla> listarTabla() {
+        return tablaRepository.findAll();
+    }
+
+    public Tabla listarColumnaByTabla(Integer id) {
+        return tablaRepository.getColumnByTable(id).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
     }
 
     public Tabla crear(Tabla tabla) {

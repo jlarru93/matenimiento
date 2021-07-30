@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -25,16 +26,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //		registry.addInterceptor(requestInterceptor);
 //	}
 
-    @Bean
-    public CorsFilter corsFilter() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        // Don't do this in production, use a proper list  of allowed origins
-        config.setAllowedOrigins(Collections.singletonList("*"));
-        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*");
     }
 }
