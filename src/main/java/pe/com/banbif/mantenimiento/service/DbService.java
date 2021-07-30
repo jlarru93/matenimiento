@@ -23,14 +23,12 @@ public class DbService {
     private final DbRepository dbRepository;
     private static final String RECORD_NOT_FOUND = "No se encontro ningun registro";
 
-    public List<Db> listar(Optional<Integer> idDb) {
-        List<Db> resultDb = null;
-        if (idDb.isPresent()) {
-            resultDb = dbRepository.getTableByDb(idDb.get());
-        } else {
-            resultDb = dbRepository.findAll();
-        }
-        return resultDb;
+    public List<Db> listar() {
+        return  dbRepository.findAll();
+    }
+
+    public Db listarByDb(Integer idDb) {
+        return dbRepository.getTableByDb(idDb).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
     }
 
     public Db crear(Db db) {

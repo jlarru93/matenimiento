@@ -19,9 +19,14 @@ public class DbController {
 
     private final DbService dbService;
 
-    @GetMapping({"/listar/{idDb}", "/listar"})
-    public List<Db> listar(@PathVariable Optional<Integer> idDb) {
-        return dbService.listar(idDb);
+    @GetMapping( "/listar")
+    public List<Db> listar() {
+        return dbService.listar();
+    }
+
+    @GetMapping({"/listar/{idDb}"})
+    public Db listarByDb(@PathVariable Integer idDb) {
+        return dbService.listarByDb(idDb);
     }
 
     @PostMapping("/crear")
