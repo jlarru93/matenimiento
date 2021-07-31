@@ -27,7 +27,7 @@ public class DbService {
         return  dbRepository.findAll();
     }
 
-    public Db listarByDb(Integer idDb) {
+    public Db listarTableByDb(Integer idDb) {
         return dbRepository.getTableByDb(idDb).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
     }
 

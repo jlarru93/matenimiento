@@ -18,10 +18,10 @@ public class TablaController {
 
     private final TablaService tablaService;
 
-    @GetMapping("/listar")
-    public List<Tabla> listar() {
-        return tablaService.listarTabla();
-    }
+//    @GetMapping("/listar/{id}")
+//    public List<Tabla> listarTableByDb(@PathVariable Integer id) {
+//        return tablaService.listarTableByDb(id);
+//    }
 
     @GetMapping("/listar/{id}")
     public Tabla listarColumnaByTable(@PathVariable Integer id) {

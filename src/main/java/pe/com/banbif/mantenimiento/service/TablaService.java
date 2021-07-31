@@ -23,9 +23,10 @@ public class TablaService {
 
     private static final String RECORD_NOT_FOUND = "No se encontro ningun registro";
 
-    public List<Tabla> listarTabla() {
-        return tablaRepository.findAll();
-    }
+//    public List<Tabla> listarTableByDb(Integer id) {
+////        tablaRepository.findById_db(id);
+//        return null;
+//    }
 
     public Tabla listarColumnaByTabla(Integer id) {
         return tablaRepository.getColumnByTable(id).orElseThrow(() -> new BanbifRuntimeException(RECORD_NOT_FOUND));
